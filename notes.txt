@@ -1,0 +1,41 @@
+record sale
+multi-store support
+inventory management
+lots of reports
+	- most sold
+		- sort options like highest profit to lowest etc...
+	- least sold
+	- most sold 
+customer records
+	- what was bought and so on 
+
+
+classes needed:
+	sale
+	payment types - enum
+	customer
+	item
+	inventory
+	order
+
+classes definition
+sale:
+	payment type
+	amount
+	customer
+	items
+Customer:
+	name
+	purchase history - sale
+	email
+Payment type
+	credit
+	debit
+	cash
+Inventory:
+	items
+	amount
+Order:
+	email
+	supplier name
+	default form

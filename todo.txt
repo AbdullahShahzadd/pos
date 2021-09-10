@@ -1,0 +1,12 @@
+Customer selection feature in sale module
+	add customer chosen to receipt
+	only one cust allowed per receipt
+
+save sale as a receipt
+	- modify inventory/database to reflect items sold
+	- add receipt to database with a location attribute
+	- add receipt to customer history
+
+Customer history feature in customer module, receipts and list of items bought
+
+Receipt module where one can search based on customer/time/item

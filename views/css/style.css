@@ -1,0 +1,260 @@
+
+/* ------------------- Global Alignment ---------------------- */
+
+
+.columnDiv {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.rowDiv {
+	display:flex;
+	flex-direction:row;
+	justify-content: flex-start;
+}
+
+/* ------------------- Global Style ---------------------- */
+
+
+.floatRight {
+	float: right;
+}
+
+
+.roundBorder {
+	border-radius: 5px;
+	border-color:grey;
+	border-style: solid;
+}
+
+.warning {
+	color: red;
+}
+
+
+/* ------------------- Buttons ------------------------- */
+
+.linkButton {
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	border-radius: 15px;
+	padding: 4px;
+	margin: 2px;
+	background-color: forestgreen;
+}
+
+.linkButton a{
+	color: black;
+	margin: auto;
+	font-size:large;
+	display: flex;
+    flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
+
+.linkButton a:link{
+	text-decoration: none;
+}
+
+.linkButton a:visited{
+	text-decoration:none;
+}
+
+.linkButton a:active{
+	text-decoration: underline;
+}
+
+.buttonZoom:hover{
+    transition: all .2s;
+    transform: scale(1.05);
+}
+
+
+/* ------------------- Navigation Menu ------------------------- */
+
+header{
+	display: flex;
+	flex-direction: row;
+}
+
+#logo{
+    flex-grow: .1;
+    margin: 15px 15px 15px 15px;
+}
+
+.head{
+    margin: 15px 15px 15px 15px;
+}
+
+
+#navigation a:hover{
+    text-decoration: none;
+    transition: all .2s;
+    transform: scale(1.05);
+}
+
+#navigation a:link{
+    text-decoration: none;
+}
+
+#navigation a:visited{
+    text-decoration: none;
+}
+
+#navigation a:active{
+    text-decoration: underline;
+}
+
+#navigation{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
+    margin-bottom: 30px;
+}
+
+.chooseLocationAnchors{
+	display: none;
+	box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.4);
+	position: absolute;
+	z-index: 1;
+	min-width: 150px;
+	background-color: forestgreen;
+}
+
+.chooseLocationAnchors a{
+	color: black;
+	text-decoration: none;
+	display: block;
+}
+
+.locationAnchorParent {
+	position: relative;
+	display: inline-block;
+}
+
+.locationAnchorParent:hover .chooseLocationAnchors{
+	display: block;
+}
+
+
+/* ------------------------------ Sales Div ------------------------ */
+
+#saleDiv {
+	margin: 0px 5px;
+	width: 50%;
+}
+
+#searchDiv {
+	width: 50%;
+}
+
+#searchBar {
+	width: 90%;
+}
+
+.saleElMargin {
+	margin: 2px 10px;
+}
+
+
+#itemListDiv {
+	height: 200px;
+	overflow-y:auto;
+}
+
+.itemBrandColumn {
+	width: 15%;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.itemNameColumn {
+	width: 40%;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.itemCategoryColumn {
+	width: 15%;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.itemPriceColumn {
+	width: 10%;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.itemSelectButton {
+	width: 10%;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.itemStockColumn {
+	width: 10%;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.itemLineHeight{
+	height: 30px;
+}
+
+/* #formDiv{ */
+/*     display: none; */
+/* } */
+
+/* ------------------------------ Receipt Div ------------------------ */
+
+#receiptOuterDiv {
+	position: relative;
+	width: 40%;
+}
+
+#receiptDiv {
+	height: 350px;
+	overflow-y:auto;
+}
+
+#moneyStuff {
+	position: absolute;
+	bottom: 0;
+	right: 25%;
+}
+
+.itemQtyColumn {
+
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.removeItemColumn {
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* ------------------------------ Body Div -------------------------- */
+
+.bodyDiv {
+	margin: 50px 0px;
+}
+
+/* ------------------------------ Left Menu -------------------------- */
+
+#leftMenu {
+	width: 10%;
+}

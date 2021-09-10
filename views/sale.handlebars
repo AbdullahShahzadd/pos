@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sales</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+	</head>
+
+	<body>
+		{{> headerMenu}}
+		<div class="rowDiv bodyDiv">
+			<!-- {{> leftMenu}} -->
+			<div id="saleDiv" class="columnDiv roundBorder">
+				<div>
+					<label for="saleCustSearchBar" class="saleElMargin">Search for Customer</label>
+					<input type="text" class="saleElMargin roundBorder" id="saleCustSearchBar" name="saleCustSearchBar">
+				</div>
+				<div class="roundBorder">
+					<div class="rowDiv">
+						<div class="saleElMargin"><strong>First Name</strong></div>
+						<div class="saleElMargin"><strong>Last Name</strong></div>
+						<div class="saleElMargin"><strong>Email</strong></div>
+					</div>
+					<div id="saleCustList"></div>
+				</div>
+				<div class="rowDiv">
+					<div id="searchDiv">
+						<label for="searchBar" class="saleElMargin">Item Search</label><br>
+						<input type="text" class="saleElMargin roundBorder" id="searchBar" placeholder="Search ...">
+					</div>
+					<div>
+						<label for="qty" class="saleElMargin">qty</label><br>
+						<input type="number"  class="saleElMargin roundBorder" value="1" id="qty" placeholder="1">
+
+					</div>
+				</div>
+				<div class="saleElMargin roundBorder">
+					<div class="rowDiv itemLineHeight">
+						<div class="itemBrandColumn saleElMargin"><strong>Brand</strong></div>
+						<div class="itemNameColumn saleElMargin"><strong>Name</strong></div>
+						<div class="itemCategoryColumn saleElMargin"><strong>Category</strong></div>
+						<div class="itemStockColumn saleElMargin"><strong>Available</strong></div>
+						<div class="itemPriceColumn saleElMargin"><strong>Price</strong></div>
+						<div class="itemSelectButton saleElMargin"><strong>Add</strong></div>
+					</div>
+					<div id="itemListDiv" class="saleElMargin"></div>
+				</div>
+				<div id="displayChosenCustomer" class="saleElMargin"></div>
+				<div class="rowDiv">
+					<div class="saleElMargin">Balance Remaining: <span id="balanceRemaining" name="balanceRemaining">0</span></div>
+					<div>
+						<label for="discount" class="saleElMargin">Discount: </label>
+						<input type="number" value="0"  class="saleElMargin roundBorder" id="discount" placeholder="20">
+					</div>
+				</div>
+
+
+				<div id="formDiv">
+				<form action="/completeSale" method="POST" enctype="application/x-www-form-urlencoded">
+					<div class="rowDiv">
+						<div>
+							<div>
+								<label for="credit" class="saleElMargin">Credit</label><br>
+								<input type="number" id="credit" name="credit" class="saleElMargin roundBorder" >
+							</div>
+
+							<div>
+								<label for="debit" class="saleElMargin">Debit</label><br>
+								<input type="number" id="debit" name="debit" class="saleElMargin roundBorder" >
+							</div>
+
+							<div>
+								<label for="cash" class="saleElMargin">Cash</label><br>
+								<input type="number" name="cash" id="cash" class="saleElMargin roundBorder" >
+							</div>
+								<div>
+									<input type="text" name="chosenCustEmail" id="chosenCustEmail" hidden>
+								</div>
+						</div>
+							<input type="hidden" id="receiptDiscount" name="receiptDiscount">
+							<input type="hidden" id="receiptSubmitTotal" name="receiptSubmitTotal" value="0">
+							<input type="hidden" id="chosenCustId" name="chosenCustId">
+							<input type="hidden" id="itemLocation" name="itemLocation">
+							<input type="hidden" id="receiptBalanceRemaining" name="receiptBalanceRemaining">
+						<div>
+							<button type="submit" name="submitReceiptArr" id="submitReceiptArr">Complete Sale</button>
+						</div>
+					</div>
+				</form>
+				</div>
+				
+				
+			</div>
+			<div id="receiptOuterDiv" class="roundBorder">
+				<div class="rowDiv">
+					<div class="itemQtyColumn saleElMargin itemLineHeight"><strong>Qty</strong></div>
+					<div class="itemBrandColumn saleElMargin itemLineHeight"><strong>Brand</strong></div>
+					<div class="itemNameColumn saleElMargin itemLineHeight"><strong>Name</strong></div>
+					<div class="itemPriceColumn saleElMargin itemLineHeight"><strong>Price</strong></div>
+					<div class="removeItemColumn saleElMargin itemLineHeight"><strong>Remove</strong></div>
+				</div>
+				<div id="receiptDiv">
+
+				</div>
+
+				<div id="moneyStuff" class="rowDiv">
+					<div class="columnDiv">
+					<div>Subtotal:</div>
+					<div>Discount:</div>
+					<div>Total:</div>
+					</div>
+					<div class="columnDiv">
+						<div><span id="subtotal" class="saleElMargin"></span></div>
+						<div><span id="discountAmount" class="saleElMargin"></span></div>
+						<div><span id="totalVal" class="saleElMargin"></span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="./js/saleScript.js" type="text/javascript"></script>
+
+</html>

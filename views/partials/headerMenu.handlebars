@@ -1,0 +1,17 @@
+<header>
+	<nav id="navigation">
+		<div id="logo">Tester</div>
+		{{#if user}}
+			<a href="/dashboard" class="head">Dashboard</a>
+			<a href="/logout" class="head">Logout</a>
+			<a href="/sale" class="head">Sale</a>
+			<div id="chosenLocationDisplayDiv" class="head"></div>
+			<div id="chooseLocation">
+			</div>
+		{{/if}}
+		{{#unless user}}
+			<a href="/register" class="head">Registration</a>
+			<a href="/login" class="head">Login</a>
+		{{/unless}}
+	</nav>
+</header>

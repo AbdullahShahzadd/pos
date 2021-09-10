@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Registration</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+	</head>
+	<body>
+		{{> headerMenu}}
+		<div>
+			<form action="/registerOwner" method="POST" enctype="application/x-www-form-urlencoded">
+				<div>
+					<label for="ownerFname" class="saleElMargin">First Name</label>
+					<input type="text" id="ownerFname" name="ownerFname" class="saleElMargin" required>
+				</div>
+				<div>
+					<label for="ownerLname" class="saleElMargin">Last Name</label>
+					<input type="text" id="ownerLname" name="ownerLname" class="saleElMargin" required>
+				</div>
+
+				<div>
+					<label for="companyName" class="saleElMargin">Company Name</label>
+					<input type="text" id="companyName" name="companyName" class="saleElMargin">
+				</div>
+				<div>
+					<label for="streetNumber" class="saleElMargin">Street Number</label>
+					<input type="number" id="streetNumber" name="streetNumber" class="saleElMargin" required>
+				</div>
+				<div>
+					<label for="streetName" class="saleElMargin">Street Name</label>
+					<input type="text" id="streetName" name="streetName" class="saleElMargin" required>
+				</div>
+				<div>
+					<label for="postalCode" class="saleElMargin">Postal Code</label>
+					<input type="text" id="postalCode" name="postalCode" class="saleElMargin" required>
+				</div>
+				<div>
+					<label for="city" class="saleElMargin">City</label>
+					<input type="text" id="city" name="city" class="saleElMargin" required>
+				</div>
+				<div>
+					<label for="province" class="saleElMargin">Province</label>
+					<input type="text" id="province" name="province" class="saleElMargin" required>
+				</div>
+				<div>
+					<label for="country" class="saleElMargin">Country</label>
+					<input type="text" id="country" name="country" class="saleElMargin" required>
+				</div>
+				<div>
+					{{#if emailError}}
+					<div><span class="warning">Email already in use, please use another</span></div>
+					{{/if}}
+					<label for="ownerEmail" class="saleElMargin">Email</label>
+					<input type="email" id="ownerEmail" name="ownerEmail" class="saleElMargin" required>
+				</div>
+				<div>
+					{{#if passwordError}}
+					<div><span class="warning">Incorrect syntax, please try again</span></div>
+					{{/if}}
+					<div><span>Must have at least one lowercase letter, one uppercase letter, one number, and a length of 8 - 10</span></div>
+					<label for="password" class="saleElMargin">Password</label>
+					<input type="password" id="ownerPassword" name="ownerPassword" required>
+				</div>
+				<div>
+					<input type="submit" value="Submit">
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

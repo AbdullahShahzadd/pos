@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+	</head>
+	<body>
+		{{> headerMenu}}
+		<div>
+			<form action="/loginUser" method="POST" enctype="application/x-www-form-urlencoded">
+			<div>
+				<label for="loginEmail" class="saleElMargin">Email</label>
+				<input type="email" id="loginEmail" name="loginEmail" class="saleElMargin">
+			</div>
+			<div>
+				<label for="loginPassword" class="saleElMargin">Password</label>
+				<input type="password" id="loginPassword" name="loginPassword" class="saleElMargin">
+			</div>
+			<div>
+				<input type="submit" value="Login">
+			</div>
+			</form>
+		</div>
+	</body>
+</html>
