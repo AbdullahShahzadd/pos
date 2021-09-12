@@ -17,6 +17,10 @@
 /* ------------------- Global Style ---------------------- */
 
 
+.center {
+	margin: auto;
+}
+
 .floatRight {
 	float: right;
 }
@@ -162,7 +166,7 @@ header{
 
 
 #itemListDiv {
-	height: 200px;
+	max-height: 800px;
 	overflow-y:auto;
 }
 
@@ -257,4 +261,35 @@ header{
 
 #leftMenu {
 	width: 10%;
+}
+
+
+/* ------------------------------ Dashboard -------------------------- */
+
+.itemAddSpan {
+	min-width: 800px;
+}
+
+.expand :hover {
+	transition: transform .2s;
+	transform: scale(1.05, 1.05);
+}
+
+.submitReceivedColumn {
+	width: 10%;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.itemReceivedColumn {
+	width: 10%;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#receiveOrderItems {
+	max-height: 200px;
+	overflow-y:auto;
 }

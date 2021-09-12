@@ -17,6 +17,7 @@ var adminSchema = new Schema({
 		"required": true
 	},
 	"locations": [{type: mongoose.Schema.Types.ObjectId, ref: 'Locations'}],
+	"role": String,
 	"password": String
 })
 

@@ -5,13 +5,16 @@ module.exports.check = async function(inEmail, inPassword){
 		badEmail: false,
 		badPassword: false
 	}
-	const exists = Admin.findOne({email: inEmail.toLowerCase});
+	const exists = await Admin.findOne({email: inEmail.toLowerCase});
 	if(exists != null){
 		errorObj.badEmail = true;
 	}
+	console.log("in validateRegistration")
+	console.log(exists)
 	errorObj.badPassword = checkPassword(inPassword)
 	return errorObj;
 }
+
 
 function checkPassword(password){
 	var hasError = false;

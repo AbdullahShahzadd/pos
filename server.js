@@ -15,6 +15,8 @@ var insertReceiptMod = require("./modules/addReceipt");
 var insertLocationMod = require("./modules/insertLocation")
 var checkRegistrationMod = require("./modules/validateRegistration")
 var checkValidCustMod = require("./modules/validateCustomer")
+var editItemMod = require("./modules/editItem")
+var insertEmployeeMod = require("./modules/registerEmployee")
 
 const HTTP_PORT = process.env.PORT || 8080;
 
@@ -195,6 +197,36 @@ app.post('/changeChosenLocation', ensureLogin, async (req, res) => {
 
 app.post('/testSubmission', ensureLogin, (req, res) => {
 	res.redirect("/sale")
+})
+
+app.post('/editItem', ensureLogin, async(req, res) => {
+	var fData = req.body;
+	editItemMod.modify(fData.itemId, fData.name, fData.brand, fData.category, fData.size, fData.price, fData.qty)
+
+	console.log(req.body)
+	res.redirect("/dashboard")
+})
+
+app.post('/receiveOrder', ensureLogin, async(req,res) => {
+	editItemMod.receiveOrder(req.body.id, req.body.qtyReceived)
+	res.redirect("/dashboard")
+})
+
+app.post('/addEmployee', ensureLogin, async (req, res) => {
+	console.log(req.body)
+	var empData = req.body;
+	var emailPassword = await checkRegistrationMod.check(req.body.empEmail, req.body.empPassword)
+	if(!emailPassword.badEmail && !emailPassword.badPassword){
+		insertEmployeeMod.addEmployee(req.session.user.chosenLocation, empData.empLName, empData.empFName, empData.empPassword, empData.empEmail, empData.empRole)
+		res.redirect("/dashboard")
+	}else{
+		res.render("dashboard.handlebars", {
+			layout: false,
+			user: req.session.user,
+			empEmailErr: emailPassword.badEmail,
+			empPasswordErr: emailPassword.badPassword
+		})
+	}
 })
 
 app.listen(HTTP_PORT, function(){
