@@ -12,6 +12,7 @@
 	display:flex;
 	flex-direction:row;
 	justify-content: flex-start;
+	flex-wrap: wrap;
 }
 
 /* ------------------- Global Style ---------------------- */
@@ -34,6 +35,10 @@
 
 .warning {
 	color: red;
+}
+
+body {
+	background-color: #CFDDC8;
 }
 
 
@@ -150,6 +155,7 @@ header{
 #saleDiv {
 	margin: 0px 5px;
 	width: 50%;
+	min-width: 675px;
 }
 
 #searchDiv {
@@ -171,21 +177,28 @@ header{
 }
 
 .itemBrandColumn {
-	width: 15%;
+	width: 10%;
 	display:flex;
 	align-items: center;
 	justify-content: center;
 }
 
 .itemNameColumn {
-	width: 40%;
+	width: 30%;
 	display:flex;
 	align-items: center;
 	justify-content: center;
 }
 
 .itemCategoryColumn {
-	width: 15%;
+	width: 10%;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.itemStockColumn {
+	width: 10%;
 	display:flex;
 	align-items: center;
 	justify-content: center;
@@ -205,12 +218,6 @@ header{
 	justify-content: center;
 }
 
-.itemStockColumn {
-	width: 10%;
-	display:flex;
-	align-items: center;
-	justify-content: center;
-}
 
 .itemLineHeight{
 	height: 30px;
@@ -225,6 +232,7 @@ header{
 #receiptOuterDiv {
 	position: relative;
 	width: 40%;
+	min-width: 400px;
 }
 
 #receiptDiv {
@@ -266,13 +274,23 @@ header{
 
 /* ------------------------------ Dashboard -------------------------- */
 
-.itemAddSpan {
-	min-width: 800px;
+
+.formLabel {
+	width: 25%;
+}
+
+.editItemBox {
+	width: 300px;
 }
 
 .expand :hover {
-	transition: transform .2s;
-	transform: scale(1.05, 1.05);
+	transition: all .2s;
+	transform: scale(1.5);
+}
+
+.expandWidth {
+	width: 80%;
+	margin: auto;
 }
 
 .submitReceivedColumn {
@@ -282,6 +300,7 @@ header{
 	justify-content: center;
 }
 
+.twentyPercent
 .itemReceivedColumn {
 	width: 10%;
 	display:flex;
@@ -292,4 +311,40 @@ header{
 #receiveOrderItems {
 	max-height: 200px;
 	overflow-y:auto;
+}
+
+#custDiv {
+	width: 30%;
+	margin: auto;
+	min-height: 200px;
+	max-height: 200px;
+	overflow-y:auto;
+}
+
+.customerHeader {
+	width: 80%;
+	margin: 0px auto 10px auto;
+	text-align: center;
+}
+
+.custName {
+	width: 20%;
+}
+
+.custEmail {
+	width: 35%;
+}
+
+#addCustDiv {
+	width: 30%;
+	margin: auto;
+	min-height: 200px;
+	max-height: 200px;
+}
+
+.hiddenDivName {
+	width: 70%; 
+	margin: auto; 
+	padding: 20px;
+	text-align: center;
 }

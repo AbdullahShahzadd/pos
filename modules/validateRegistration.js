@@ -9,8 +9,6 @@ module.exports.check = async function(inEmail, inPassword){
 	if(exists != null){
 		errorObj.badEmail = true;
 	}
-	console.log("in validateRegistration")
-	console.log(exists)
 	errorObj.badPassword = checkPassword(inPassword)
 	return errorObj;
 }

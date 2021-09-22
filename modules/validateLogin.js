@@ -1,6 +1,7 @@
 var bcrypt = require('bcryptjs');
 const Admin = require("../models/admin");
 const Location = require("../models/location");
+const {body} = require("express-validator")
 
 module.exports.validate = async function(loginFormData){
 	var user = {
@@ -8,8 +9,10 @@ module.exports.validate = async function(loginFormData){
 		fname: null,
 		lname: null,
 		locations: [],
+		role: null,
 		email: null
 	}
+	
 	var userExists = await Admin.findOne({email: loginFormData.loginEmail}).lean().populate({path: 'locations', model: Location}).catch(err => {
 		console.log("finding user err: " + err);
 	})
@@ -23,6 +26,11 @@ module.exports.validate = async function(loginFormData){
 		user.email = userExists.email;
 		user._id = userExists._id;
 		user.locations = userExists.locations;
+		user.role = userExists.role;
+
+		if(user.role == "admin"){
+			user.employees = await Admin.find({locations: user.locations[0]._id})
+		}
 	}
 
 	return user;

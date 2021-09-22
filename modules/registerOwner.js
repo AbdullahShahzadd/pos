@@ -28,6 +28,7 @@ module.exports.addOwner = async function(sName, sNum, postal, city, province, co
 		lname: oLName,
 		email: oEmail,
 		password: hash,
+		role: "admin",
 		locations: chosenLocation._id
 	})
 

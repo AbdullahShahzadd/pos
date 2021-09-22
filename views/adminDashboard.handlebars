@@ -7,15 +7,14 @@
 
 	<body>
 		{{> headerMenu}}
-		<div id="customerParentDiv">
+		<div id="customerParentDiv" class="expandWidth">
 
-			<div class="bodyDiv rowDiv">
-				<div class="columnDiv">
-					<div id="custDiv" class="columnDiv roundBorder"></div>
-					<div id="addCustDiv" class="columnDiv roundBorder">
+				<div class="rowDiv">
+					<div id="custDiv" class="columnDiv saleElMargin roundBorder"></div>
+					<div id="addCustDiv" class="columnDiv saleElMargin roundBorder">
+
+						<h4 class="customerHeader">Add Customer</h4>
 						<form action="/addCustomer" method="POST" enctype="application/x-www-form-urlencoded">
-							<fieldset>
-								<legend>Add Customer:</legend>
 							<div class="rowDiv">
 								<div>
 									<label for="fname" class="saleElMargin">First Name</label><br>
@@ -30,40 +29,38 @@
 							<div><span class="warning">Email already registered to this location</span></div>
 							{{/if}}
 							<div>
-								<label for="email" class="saleElMargin">Email</label>
+								<label for="email" class="saleElMargin">Email</label><br>
 								<input type="text" id="email" name="email" class="saleElMargin roundBorder" required>
 							</div>
 							<div>
-								<input type="submit">
+								<input type="submit" class="center">
 							</div>
-							</fieldset>
 						</form>
 					</div>
 				</div>
-			</div>
 		</div>
-		<div id="itemLocationMessage" class="saleElMargin"></div>
-					<div class="rowDiv itemLineHeight">
+		<div id="itemLocationMessage" class="saleElMargin expandWidth"></div>
+					<div class="rowDiv itemLineHeight expandWidth">
 						<div class="itemBrandColumn saleElMargin"><strong>Brand</strong></div>
 						<div class="itemNameColumn saleElMargin"><strong>Name</strong></div>
 						<div class="itemCategoryColumn saleElMargin"><strong>Category</strong></div>
 						<div class="itemStockColumn saleElMargin"><strong>Available</strong></div>
 						<div class="itemPriceColumn saleElMargin"><strong>Price</strong></div>
 					</div>
-			<div id="itemListDiv"></div>
+			<div id="itemListDiv" class="expandWidth"></div>
 
 
-		<div id="editItemButton" class="saleElMargin expand roundBorder">
-			<h3>Edit Item</h3>
+		<div id="editItemButton" class="saleElMargin roundBorder expandWidth expand">
+			<h2 class="hiddenDivName">Edit Item</h2>
+		</div>
+			<div id="editItemDiv" class="expandWidth"></div>
+
+
+
+			<div id="receiveOrderSelector" class="saleElMargin expand roundBorder expandWidth">
+				<h2 class="hiddenDivName">Receive Order</h2>
 			</div>
-			<div id="editItemDiv"></div>
-
-
-
-			<div id="receiveOrderSelector" class="saleElMargin expand roundBorder">
-				<h3>Receive Order</h3>
-			</div>
-		<div id="receiveOrder">
+		<div id="receiveOrder" class="expandWidth">
 			<div>
 				<label for="findItem" class="saleElMargin">Search for Item</label>
 				<input type="text" id="findItem" class="saleElMargin roundBorder" name="findItem">
@@ -79,56 +76,47 @@
 				</div>
 				<div id="receiveOrderItems"></div>
 			</div>
-			hello
 		</div>
 
 
-			<div id="addItemSelector" class="saleElMargin expand roundBorder">
-				<h3>Add Item</h3>
+			<div id="addItemSelector" class="saleElMargin expand roundBorder expandWidth">
+				<h2 class="hiddenDivName">Add Item</h2>
 			</div>
-			<div id="addItemDiv" class="saleElMargin">
-		<div class="columnDiv">
-			<div>Add Item:</div>
+			<div id="addItemDiv" class="saleElMargin expandWidth">
+		<div class="columnDiv editItemBox center">
 			<form action="/addItem" id="addItem" method="POST" enctype="application/x-www-form-urlencoded">
 				<div>
-				<label for="itemName">Item name</label><br>
-				<input type="text" name="itemName" id="itemName" placeholder="Nothingness">
+				<input type="text" name="itemName" id="itemName" placeholder="Item Name" class="saleElMargin">
 				</div>
 				<div>
-				<label for="brand">Brand</label><br>
-				<input type="text" name="itemBrand" id="itemBrand" placeholder="Nothing Corp">
+				<input type="text" name="itemBrand" id="itemBrand" placeholder="Brand" class="saleElMargin">
 				</div>
 				<div>
-				<label for="category">Category</label><br>
-				<input type="text" name="itemCategory" id="itemCategory" placeholder="nothing">
+				<input type="text" name="itemCategory" id="itemCategory" placeholder="Category" class="saleElMargin">
 				</div>
 				<div>
-				<label for="size">Size</label><br>
-				<input type="text" name="itemSize" id="itemSize" placeholder="0">
+				<input type="text" name="itemSize" id="itemSize" placeholder="Size" class="saleElMargin">
 				</div>
 
 				<div>
-					<label for="price">Price</label>
-					<input type="number" name="itemPrice" id="itemPrice" min="0" step=".01" placeholder="7.54">
+					<input type="number" name="itemPrice" id="itemPrice" min="0" step=".01" placeholder="Price" class="saleElMargin">
 				</div>
 				<div>
-					<label for="qty">Quantity</label>
-					<input type="number" name="itemQty", id="itemQty" placeholder="2">
+					<input type="number" name="itemQty", id="itemQty" placeholder="Quantity" class="saleElMargin">
 				</div>
 				<div>
-					<input type="submit" value="Create Item">
+					<input type="submit" value="Create Item" class="saleElMargin">
 				</div>
 			</form>
 		</div>
 	</div>
-		<div id="addEmployeeSelector" class="saleElMargin expand roundBorder">
-			<h3>Add Employee</h3></div>
-		<div id="addEmployee">
+		<div id="addEmployeeSelector" class="saleElMargin expand roundBorder expandWidth">
+			<h2 class="hiddenDivName">Add Employee</h2></div>
+		<div id="addEmployee" class="expandWidth">
 			<form action="/addEmployee" method="POST" enctype="application/x-www-form-urlencoded">
 				<div>
 					<div class="rowDiv saleElMargin">
 						<div class="saleElMargin">
-							<!-- <label for="empFName">First Name</label> -->
 							<input type="text" name="empFName" placeholder="First Name" required>
 						</div>
 						<div class="saleElMargin">
@@ -160,6 +148,63 @@
 					<div>
 						<input type="submit" value="Submit">
 					</div>
+				</div>
+			</form>
+		</div>
+
+		<div id="modifyEmployeeSelector" class="saleElMargin expand roundBorder expandWidth">
+			<h2 class="hiddenDivName">Modify Employee</h2>
+		</div>
+		<div id="modifyEmployee" class="expandWidth">
+				<!-- <div class="rowDiv"> -->
+				<!--     <form action="/editEmployee" method="POST" enctype="application/x-www-form-urlencoded"> -->
+				<!--         <div> -->
+				<!--             <label for="fname">First Name</label> -->
+				<!--             <input type="text" name="fname" value="{{this.fname}}" required> -->
+				<!--         </div> -->
+				<!--         <div> -->
+				<!--             <label for="lName">Last Name</label> -->
+				<!--             <input type="text" name="lname" value="{{this.lname}}" required> -->
+				<!--         </div> -->
+				<!--         <div> -->
+				<!--             <label for="email">Email</label> -->
+				<!--             <input type="email" name="email" value="{{this.email}}" required> -->
+				<!--         </div> -->
+				<!--         <div> -->
+				<!--             <label for="password">Password</label> -->
+				<!--             <input type="password" name="password" required> -->
+				<!--         </div> -->
+				<!--     </form> -->
+				<!-- </div> -->
+		</div>
+
+		<div id="addLocationSelector" class="saleElMargin expand roundBorder expandWidth">
+			<h2 class="hiddenDivName">Add Location</h2></div>
+		<div id="addLocation" class="editItemBox center">
+			<form action="/addLocation" method="POST" enctype="application/x-www-form-urlencoded">
+				<div>
+					<input type="text" name="streetName" placeholder="Street Name" required class="saleElMargin">
+				</div>
+				<div>
+					<input type="number" name="streetNumber" placeholder="Street Number" required class="saleElMargin">
+				</div>
+				<div>
+					<input type="text" name="postalCode" placeholder="Postal Code" required class="saleElMargin">
+				</div>
+				<div>
+					<input type="text" name="city" placeholder="City" required class="saleElMargin">
+				</div>
+				<div>
+					<input type="text" name="province" placeholder="Province" required class="saleElMargin">
+				</div>
+				<div>
+					<input type="text" name="country" placeholder="Country" required class="saleElMargin">
+				</div>
+				<div>
+					<input type="text" name="name" placeholder="Business Name" class="saleElMargin">
+				</div>
+				<div>
+					<input type="submit" value="Submit" class="saleElMargin">
 				</div>
 			</form>
 		</div>

@@ -14,36 +14,6 @@ function displayItems(){
 	itemLocationMessageDiv.appendChild(document.createTextNode(`Items at ${chosenLocationName}: `))
 
 	if(allItemsArr.length > 0){
-		// var itemHeadingDiv = document.createElement('div');
-		// itemHeadingDiv.classList.add("rowDiv", "itemLineHeight");
-
-		// var brandDiv = document.createElement('div');
-		// brandDiv.classList.add("saleElMargin", "itemBrandColumn", "itemLineHeight")
-		// brandDiv.appendChild(document.createTextNode("Brand"));
-		// itemHeadingDiv.appendChild(brandDiv);
-
-		// var nameDiv = document.createElement('div');
-		// nameDiv.classList.add("saleElMargin", "itemNameColumn", "itemLineHeight")
-		// nameDiv.appendChild(document.createTextNode("Name"));
-		// itemHeadingDiv.appendChild(nameDiv);
-
-		// var categoryDiv = document.createElement('div');
-		// categoryDiv.classList.add("saleElMargin", "itemCategoryColumn", "itemLineHeight")
-		// categoryDiv.appendChild(document.createTextNode("Category"));
-		// itemHeadingDiv.appendChild(categoryDiv);
-
-		// var stockDiv = document.createElement('div');
-		// stockDiv.classList.add("saleElMargin", "itemStockColumn", "itemLineHeight")
-		// stockDiv.appendChild(document.createTextNode("Available"));
-		// itemHeadingDiv.appendChild(stockDiv);
-
-		// var priceDiv = document.createElement('div');
-		// priceDiv.classList.add("saleElMargin", "itemPriceColumn", "itemLineHeight")
-		// priceDiv.appendChild(document.createTextNode("Price"));
-		// itemHeadingDiv.appendChild(priceDiv);
-
-		// itemDiv.appendChild(itemHeadingDiv)
-
 		allItemsArr.forEach((el) => {
 			var rowDiv = document.createElement('div');
 			rowDiv.classList.add("rowDiv", "itemLineHeight");
@@ -187,116 +157,116 @@ function displayLocations(){
 	}
 }
 
-function displayEditItem(someItemsArr){
-	var editItemParentDiv = document.getElementById('editItemDiv');
-	editItemParentDiv.classList.add("rowDiv", "saleElMargin")
+// function displayEditItem(someItemsArr){
+//     var editItemParentDiv = document.getElementById('editItemDiv');
+//     editItemParentDiv.classList.add("rowDiv", "saleElMargin")
 	
-	someItemsArr.forEach(el => {
-		var formDiv = document.createElement('div')
-		formDiv.classList.add("roundBorder", "saleElMargin")
+//     someItemsArr.forEach(el => {
+//         var formDiv = document.createElement('div')
+//         formDiv.classList.add("roundBorder", "saleElMargin")
 
-		var formEl = document.createElement('form');
-		formEl.action = "/editItem";
-		formEl.method = "POST"
-		formEl.enctype = "application/x-www-form-urlencoded"
+//         var formEl = document.createElement('form');
+//         formEl.action = "/editItem";
+//         formEl.method = "POST"
+//         formEl.enctype = "application/x-www-form-urlencoded"
 
-		var nameDiv = document.createElement('div');
-		nameDiv.classList.add("saleElMargin")
-		var nameLabel = document.createElement('label');
-		nameLabel.classList.add("saleElMargin")
-		var nameSpan = document.createElement('span')
-		nameSpan.classList.add("itemAddSpan")
-		nameSpan.appendChild(document.createTextNode("Name"))
-		nameLabel.appendChild(nameSpan)
-		// nameLabel.appendChild(document.createTextNode("Name"))
-		var nameInput = document.createElement('input');
-		// nameInput.classList.add("itemAddInput")
-		nameInput.type = "text";
-		nameInput.name = "name";
-		nameInput.value = el.name;
-		nameLabel.appendChild(nameInput)
-		nameDiv.appendChild(nameLabel);
-		formEl.appendChild(nameDiv);
+//         var nameDiv = document.createElement('div');
+//         nameDiv.classList.add("saleElMargin")
+//         var nameLabel = document.createElement('label');
+//         nameLabel.classList.add("saleElMargin")
+//         var nameSpan = document.createElement('span')
+//         nameSpan.classList.add("itemAddSpan")
+//         nameSpan.appendChild(document.createTextNode("Name"))
+//         nameLabel.appendChild(nameSpan)
+//         // nameLabel.appendChild(document.createTextNode("Name"))
+//         var nameInput = document.createElement('input');
+//         // nameInput.classList.add("itemAddInput")
+//         nameInput.type = "text";
+//         nameInput.name = "name";
+//         nameInput.value = el.name;
+//         nameLabel.appendChild(nameInput)
+//         nameDiv.appendChild(nameLabel);
+//         formEl.appendChild(nameDiv);
 
-		var brandDiv = document.createElement('div');
-		brandDiv.classList.add("saleElMargin")
-		var brandLabel = document.createElement('label');
-		brandLabel.appendChild(document.createTextNode("Brand"));
-		var brandInput = document.createElement('input');
-		brandInput.type = "text";
-		brandInput.name = "brand";
-		brandInput.value = el.brand;
-		brandLabel.appendChild(brandInput)
-		brandDiv.appendChild(brandLabel)
-		formEl.appendChild(brandDiv)
+//         var brandDiv = document.createElement('div');
+//         brandDiv.classList.add("saleElMargin")
+//         var brandLabel = document.createElement('label');
+//         brandLabel.appendChild(document.createTextNode("Brand"));
+//         var brandInput = document.createElement('input');
+//         brandInput.type = "text";
+//         brandInput.name = "brand";
+//         brandInput.value = el.brand;
+//         brandLabel.appendChild(brandInput)
+//         brandDiv.appendChild(brandLabel)
+//         formEl.appendChild(brandDiv)
 
-		var categoryDiv = document.createElement('div');
-		categoryDiv.classList.add("saleElMargin")
-		var categoryLabel = document.createElement('label')
-		categoryLabel.appendChild(document.createTextNode("Category"))
-		var categoryInput = document.createElement('input')
-		categoryInput.name = "category"
-		categoryInput.type = "text"
-		categoryInput.value = el.category;
-		categoryLabel.appendChild(categoryInput)
-		categoryDiv.appendChild(categoryLabel)
-		formEl.appendChild(categoryDiv)
+//         var categoryDiv = document.createElement('div');
+//         categoryDiv.classList.add("saleElMargin")
+//         var categoryLabel = document.createElement('label')
+//         categoryLabel.appendChild(document.createTextNode("Category"))
+//         var categoryInput = document.createElement('input')
+//         categoryInput.name = "category"
+//         categoryInput.type = "text"
+//         categoryInput.value = el.category;
+//         categoryLabel.appendChild(categoryInput)
+//         categoryDiv.appendChild(categoryLabel)
+//         formEl.appendChild(categoryDiv)
 
-		var sizeDiv = document.createElement('div');
-		sizeDiv.classList.add("saleElMargin")
-		var sizeLabel = document.createElement('label')
-		sizeLabel.appendChild(document.createTextNode("Size"))
-		var sizeInput = document.createElement('input')
-		sizeInput.name = "size"
-		sizeInput.type = "text"
-		sizeInput.value = el.size
-		sizeLabel.appendChild(sizeInput)
-		sizeDiv.appendChild(sizeLabel)
-		formEl.appendChild(sizeDiv)
+//         var sizeDiv = document.createElement('div');
+//         sizeDiv.classList.add("saleElMargin")
+//         var sizeLabel = document.createElement('label')
+//         sizeLabel.appendChild(document.createTextNode("Size"))
+//         var sizeInput = document.createElement('input')
+//         sizeInput.name = "size"
+//         sizeInput.type = "text"
+//         sizeInput.value = el.size
+//         sizeLabel.appendChild(sizeInput)
+//         sizeDiv.appendChild(sizeLabel)
+//         formEl.appendChild(sizeDiv)
 
-		var priceDiv = document.createElement('div');
-		priceDiv.classList.add("saleElMargin")
-		var priceLabel = document.createElement('label')
-		priceLabel.appendChild(document.createTextNode('Price'))
-		var priceInput = document.createElement('input')
-		priceInput.type = "number"
-		priceInput.name = "price"
-		priceInput.value = el.price
-		priceLabel.appendChild(priceInput)
-		priceDiv.appendChild(priceLabel)
-		formEl.appendChild(priceDiv)
+//         var priceDiv = document.createElement('div');
+//         priceDiv.classList.add("saleElMargin")
+//         var priceLabel = document.createElement('label')
+//         priceLabel.appendChild(document.createTextNode('Price'))
+//         var priceInput = document.createElement('input')
+//         priceInput.type = "number"
+//         priceInput.name = "price"
+//         priceInput.value = el.price
+//         priceLabel.appendChild(priceInput)
+//         priceDiv.appendChild(priceLabel)
+//         formEl.appendChild(priceDiv)
 
-		var availableDiv = document.createElement('div')
-		availableDiv.classList.add("saleElMargin")
-		var availableLabel = document.createElement('label')
-		availableLabel.appendChild(document.createTextNode("Available"))
-		var availableInput = document.createElement('input')
-		availableInput.type = "number"
-		availableInput.name = "qty"
-		availableInput.value = el.qty
-		availableLabel.appendChild(availableInput)
-		availableDiv.appendChild(availableLabel)
-		formEl.appendChild(availableDiv)
+//         var availableDiv = document.createElement('div')
+//         availableDiv.classList.add("saleElMargin")
+//         var availableLabel = document.createElement('label')
+//         availableLabel.appendChild(document.createTextNode("Available"))
+//         var availableInput = document.createElement('input')
+//         availableInput.type = "number"
+//         availableInput.name = "qty"
+//         availableInput.value = el.qty
+//         availableLabel.appendChild(availableInput)
+//         availableDiv.appendChild(availableLabel)
+//         formEl.appendChild(availableDiv)
 
-		var itemIdInput = document.createElement('input')
-		itemIdInput.type = "hidden"
-		itemIdInput.value = el._id
-		itemIdInput.name = "itemId"
-		formEl.appendChild(itemIdInput)
+//         var itemIdInput = document.createElement('input')
+//         itemIdInput.type = "hidden"
+//         itemIdInput.value = el._id
+//         itemIdInput.name = "itemId"
+//         formEl.appendChild(itemIdInput)
 
-		var submitButtonDiv = document.createElement('div')
-		submitButtonDiv.classList.add("center")
-		var submitButton = document.createElement('input')
-		submitButton.classList.add("center")
-		submitButton.type = "submit"
-		submitButton.value = "Submit Change"
-		submitButtonDiv.appendChild(submitButton)
-		formEl.appendChild(submitButtonDiv)
+//         var submitButtonDiv = document.createElement('div')
+//         submitButtonDiv.classList.add("center")
+//         var submitButton = document.createElement('input')
+//         submitButton.classList.add("center")
+//         submitButton.type = "submit"
+//         submitButton.value = "Submit Change"
+//         submitButtonDiv.appendChild(submitButton)
+//         formEl.appendChild(submitButtonDiv)
 
-		formDiv.appendChild(formEl)
-		editItemParentDiv.appendChild(formDiv)
-	})
-}
+//         formDiv.appendChild(formEl)
+//         editItemParentDiv.appendChild(formDiv)
+//     })
+// }
 
 function displayReceiveOrderItems(itemArr){
 	var itemDiv = document.getElementById("receiveOrderItems");
@@ -407,7 +377,6 @@ window.onload = async () => {
 			// console.log(json.locations)
 			allLocationsArr = json.locations;
 			chosenLocation = json.chosenLocation
-			document.getElementById("locationToRegisterEmp").value = json.chosenLocation._id
 		})
 	await fetch('/getCustomers')
 		.then(response => (response.json()))
@@ -424,31 +393,11 @@ window.onload = async () => {
 	displayItems();
 	displayLocations();
 	displayCustomers();
-	displayEditItem(allItemsArr)
-	document.getElementById("editItemDiv").style.display = "none"
-	document.getElementById("addItemDiv").style.display = "none"
 	document.getElementById("receiveOrder").style.display = "none"
-	document.getElementById("addEmployee").style.display = "none"
 	displayReceiveOrderItems(allItemsArr);
 }
 
-document.getElementById("editItemButton").addEventListener("click", () => {
-	var hiddenEl = document.getElementById("editItemDiv")
-	if(hiddenEl.style.display == "none"){
-		hiddenEl.style.display = "flex"
-	}else{
-		hiddenEl.style.display = "none"
-	}
-})
 
-document.getElementById("addItemSelector").addEventListener("click", () => {
-	var hiddenEl = document.getElementById("addItemDiv");
-	if(hiddenEl.style.display == "none"){
-		hiddenEl.style.display = "flex"
-	}else{
-		hiddenEl.style.display = "none"
-	}
-})
 
 document.getElementById("receiveOrderSelector").addEventListener("click", () => {
 	var hiddenEl = document.getElementById("receiveOrder");
@@ -468,11 +417,3 @@ document.getElementById("findItem").addEventListener("keyup", (e) => {
 	displayReceiveOrderItems(filteredArr)	
 })
 
-document.getElementById("addEmployeeSelector").addEventListener("click", () => {
-	var hiddenEl = document.getElementById("addEmployee");
-	if(hiddenEl.style.display == "none"){
-		hiddenEl.style.display = "flex"
-	}else{
-		hiddenEl.style.display = "none"
-	}
-})

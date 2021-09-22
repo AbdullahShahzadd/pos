@@ -2,6 +2,7 @@ var allLocationsArr = [];
 var chosenLocation;
 var allCustomerArr = [];
 var allItemsArr = [];
+var allEmployeeArr = [];
 
 function displayItems(){
 
@@ -14,35 +15,6 @@ function displayItems(){
 	itemLocationMessageDiv.appendChild(document.createTextNode(`Items at ${chosenLocationName}: `))
 
 	if(allItemsArr.length > 0){
-		// var itemHeadingDiv = document.createElement('div');
-		// itemHeadingDiv.classList.add("rowDiv", "itemLineHeight");
-
-		// var brandDiv = document.createElement('div');
-		// brandDiv.classList.add("saleElMargin", "itemBrandColumn", "itemLineHeight")
-		// brandDiv.appendChild(document.createTextNode("Brand"));
-		// itemHeadingDiv.appendChild(brandDiv);
-
-		// var nameDiv = document.createElement('div');
-		// nameDiv.classList.add("saleElMargin", "itemNameColumn", "itemLineHeight")
-		// nameDiv.appendChild(document.createTextNode("Name"));
-		// itemHeadingDiv.appendChild(nameDiv);
-
-		// var categoryDiv = document.createElement('div');
-		// categoryDiv.classList.add("saleElMargin", "itemCategoryColumn", "itemLineHeight")
-		// categoryDiv.appendChild(document.createTextNode("Category"));
-		// itemHeadingDiv.appendChild(categoryDiv);
-
-		// var stockDiv = document.createElement('div');
-		// stockDiv.classList.add("saleElMargin", "itemStockColumn", "itemLineHeight")
-		// stockDiv.appendChild(document.createTextNode("Available"));
-		// itemHeadingDiv.appendChild(stockDiv);
-
-		// var priceDiv = document.createElement('div');
-		// priceDiv.classList.add("saleElMargin", "itemPriceColumn", "itemLineHeight")
-		// priceDiv.appendChild(document.createTextNode("Price"));
-		// itemHeadingDiv.appendChild(priceDiv);
-
-		// itemDiv.appendChild(itemHeadingDiv)
 
 		allItemsArr.forEach((el) => {
 			var rowDiv = document.createElement('div');
@@ -94,20 +66,26 @@ function displayCustomers(){
 	while(custDiv.firstChild){custDiv.removeChild(custDiv.firstChild);}
 	var chosenLocationName;
 	chosenLocation.name ?  chosenLocationName = chosenLocation.name : chosenLocationName = chosenLocation.streetName;
-	custDiv.appendChild(document.createTextNode(`Customers at ${chosenLocationName}: `))
+	var custLocationMessage = document.createElement('h4')
+	custLocationMessage.classList.add("customerHeader")
+	custLocationMessage.appendChild(document.createTextNode(`Customers at ${chosenLocationName}: `))
+	custDiv.appendChild(custLocationMessage)
 
 	if(allCustomerArr.length > 0){
 		var rowDiv = document.createElement('div');
 		rowDiv.classList.add("rowDiv", "saleElMargin");
 		var firstNameDiv = document.createElement('div');
+		firstNameDiv.classList.add("saleElMargin", "custName")
 		firstNameDiv.appendChild(document.createTextNode("First Name"))
 		rowDiv.appendChild(firstNameDiv);
 		
 		var lastNameDiv = document.createElement('div');
+		lastNameDiv.classList.add("saleElMargin", "custName")
 		lastNameDiv.appendChild(document.createTextNode("Last Name"));
 		rowDiv.appendChild(lastNameDiv);
 
 		var emailDiv = document.createElement('div');
+		emailDiv.classList.add("saleElMargin", "custEmail")
 		emailDiv.appendChild(document.createTextNode("Email"));
 		rowDiv.appendChild(emailDiv);
 		custDiv.appendChild(rowDiv);
@@ -117,29 +95,19 @@ function displayCustomers(){
 			rowDiv.classList.add("rowDiv", "saleElMargin");
 
 			var fnameDiv = document.createElement('div');
-			fnameDiv.classList.add("saleElMargin");
+			fnameDiv.classList.add("saleElMargin", "custName");
 			fnameDiv.appendChild(document.createTextNode(el.fname));
 			rowDiv.appendChild(fnameDiv);
 
 			var lnameDiv = document.createElement('div');
-			lnameDiv.classList.add("saleElMargin");
+			lnameDiv.classList.add("saleElMargin", "custName");
 			lnameDiv.appendChild(document.createTextNode(el.lname));
 			rowDiv.appendChild(lnameDiv);
 
 			var emailDiv = document.createElement('div');
-			emailDiv.classList.add("saleElMargin");
+			emailDiv.classList.add("saleElMargin", "custEmail");
 			emailDiv.appendChild(document.createTextNode(el.email));
 			rowDiv.appendChild(emailDiv);
-
-			var chooseCustDiv = document.createElement('div');
-			chooseCustDiv.classList.add("saleElMargin");
-			var chooseCustButton = document.createElement('button');
-			chooseCustButton.appendChild(document.createTextNode("Choose"))
-			chooseCustButton.onclick = function() { 
-				document.getElementById("chosenCustEmail").value = el.email;
-			}
-			chooseCustDiv.appendChild(chooseCustButton);
-			rowDiv.appendChild(chooseCustDiv)
 
 			custDiv.appendChild(rowDiv);
 		})
@@ -169,7 +137,6 @@ function displayLocations(){
 		chooseLocationButton.appendChild(document.createTextNode("Change Location"));
 		chooseLocationDiv.appendChild(chooseLocationButton)
 
-		hiddenId.name = "id"
 		chooseLocationDiv.appendChild(locationAnchorsDiv);
 
 		allLocationsArr.forEach(el => {
@@ -187,95 +154,97 @@ function displayLocations(){
 	}
 }
 
-function displayEditItem(someItemsArr){
+function displayEditItem(){
 	var editItemParentDiv = document.getElementById('editItemDiv');
 	editItemParentDiv.classList.add("rowDiv", "saleElMargin")
+	while(editItemParentDiv.firstChild){editItemParentDiv.removeChild(editItemParentDiv.firstChild)}
 	
-	someItemsArr.forEach(el => {
+	allItemsArr.forEach(el => {
 		var formDiv = document.createElement('div')
-		formDiv.classList.add("roundBorder", "saleElMargin")
+		formDiv.classList.add("roundBorder", "saleElMargin", "editItemBox")
 
 		var formEl = document.createElement('form');
 		formEl.action = "/editItem";
 		formEl.method = "POST"
 		formEl.enctype = "application/x-www-form-urlencoded"
 
-		var nameDiv = document.createElement('div');
-		nameDiv.classList.add("saleElMargin")
-		var nameLabel = document.createElement('label');
-		nameLabel.classList.add("saleElMargin")
-		var nameSpan = document.createElement('span')
-		nameSpan.classList.add("itemAddSpan")
-		nameSpan.appendChild(document.createTextNode("Name"))
-		nameLabel.appendChild(nameSpan)
-		// nameLabel.appendChild(document.createTextNode("Name"))
+		var nameDiv = document.createElement('div')
+		nameDiv.classList.add("saleElMargin", "rowDiv")
+		var labelDiv = document.createElement('div')
+		labelDiv.classList.add("formLabel")
+		labelDiv.appendChild(document.createTextNode("Name"))
+		nameDiv.appendChild(labelDiv)
 		var nameInput = document.createElement('input');
-		// nameInput.classList.add("itemAddInput")
 		nameInput.type = "text";
 		nameInput.name = "name";
 		nameInput.value = el.name;
-		nameLabel.appendChild(nameInput)
-		nameDiv.appendChild(nameLabel);
-		formEl.appendChild(nameDiv);
+		nameDiv.appendChild(nameInput)
+		formEl.appendChild(nameDiv)
+
 
 		var brandDiv = document.createElement('div');
-		brandDiv.classList.add("saleElMargin")
-		var brandLabel = document.createElement('label');
+		brandDiv.classList.add("saleElMargin", "rowDiv")
+		var brandLabel = document.createElement('div');
+		brandLabel.classList.add("formLabel")
 		brandLabel.appendChild(document.createTextNode("Brand"));
+		brandDiv.appendChild(brandLabel)
 		var brandInput = document.createElement('input');
 		brandInput.type = "text";
 		brandInput.name = "brand";
 		brandInput.value = el.brand;
-		brandLabel.appendChild(brandInput)
-		brandDiv.appendChild(brandLabel)
+		brandDiv.appendChild(brandInput)
 		formEl.appendChild(brandDiv)
 
 		var categoryDiv = document.createElement('div');
-		categoryDiv.classList.add("saleElMargin")
-		var categoryLabel = document.createElement('label')
+		categoryDiv.classList.add("saleElMargin", "rowDiv")
+		var categoryLabel = document.createElement('div')
+		categoryLabel.classList.add("formLabel")
 		categoryLabel.appendChild(document.createTextNode("Category"))
+		categoryDiv.appendChild(categoryLabel)
 		var categoryInput = document.createElement('input')
 		categoryInput.name = "category"
 		categoryInput.type = "text"
 		categoryInput.value = el.category;
-		categoryLabel.appendChild(categoryInput)
-		categoryDiv.appendChild(categoryLabel)
+		categoryDiv.appendChild(categoryInput)
 		formEl.appendChild(categoryDiv)
 
 		var sizeDiv = document.createElement('div');
-		sizeDiv.classList.add("saleElMargin")
-		var sizeLabel = document.createElement('label')
+		sizeDiv.classList.add("saleElMargin", "rowDiv")
+		var sizeLabel = document.createElement('div')
+		sizeLabel.classList.add("formLabel")
 		sizeLabel.appendChild(document.createTextNode("Size"))
+		sizeDiv.appendChild(sizeLabel)
 		var sizeInput = document.createElement('input')
 		sizeInput.name = "size"
 		sizeInput.type = "text"
 		sizeInput.value = el.size
-		sizeLabel.appendChild(sizeInput)
-		sizeDiv.appendChild(sizeLabel)
+		sizeDiv.appendChild(sizeInput)
 		formEl.appendChild(sizeDiv)
 
 		var priceDiv = document.createElement('div');
-		priceDiv.classList.add("saleElMargin")
-		var priceLabel = document.createElement('label')
+		priceDiv.classList.add("saleElMargin", "rowDiv")
+		var priceLabel = document.createElement('div')
+		priceLabel.classList.add("formLabel")
 		priceLabel.appendChild(document.createTextNode('Price'))
+		priceDiv.appendChild(priceLabel)
 		var priceInput = document.createElement('input')
 		priceInput.type = "number"
 		priceInput.name = "price"
 		priceInput.value = el.price
-		priceLabel.appendChild(priceInput)
-		priceDiv.appendChild(priceLabel)
+		priceDiv.appendChild(priceInput)
 		formEl.appendChild(priceDiv)
 
 		var availableDiv = document.createElement('div')
-		availableDiv.classList.add("saleElMargin")
-		var availableLabel = document.createElement('label')
+		availableDiv.classList.add("saleElMargin", "rowDiv")
+		var availableLabel = document.createElement('div')
+		availableLabel.classList.add("formLabel")
 		availableLabel.appendChild(document.createTextNode("Available"))
+		availableDiv.appendChild(availableLabel)
 		var availableInput = document.createElement('input')
 		availableInput.type = "number"
 		availableInput.name = "qty"
 		availableInput.value = el.qty
-		availableLabel.appendChild(availableInput)
-		availableDiv.appendChild(availableLabel)
+		availableDiv.appendChild(availableInput)
 		formEl.appendChild(availableDiv)
 
 		var itemIdInput = document.createElement('input')
@@ -359,6 +328,118 @@ function displayReceiveOrderItems(itemArr){
 	})
 }
 
+
+// function displayModifyEmployee(){
+//     var parentDiv = document.getElementById("modifyEmployee")
+//     var htmlString = `<div>hello</div>`
+//     parentDiv.appendChild(htmlString)
+//     // allEmployeeArr.forEach(el => {
+//     // var htmlString = `<div class="rowDiv">
+//     // hello
+//     //                 <form action="/editEmployee" method="POST" enctype="application/x-www-form-urlencoded">
+//     //                     <div>
+//     //                         <label for="fname">First Name</label>
+//     //                         <input type="text" name="fname" value="${el.fname}" required>
+//     //                     </div>
+//     //                     <div>
+//     //                         <label for="lName">Last Name</label>
+//     //                         <input type="text" name="lname" value="${el.lname}" required>
+//     //                     </div>
+//     //                     <div>
+//     //                         <label for="email">Email</label>
+//     //                         <input type="email" name="email" value="${el.email}" required>
+//     //                     </div>
+//     //                     <div>
+//     //                         <label for="password">Password</label>
+//     //                         <input type="password" name="password" required>
+//     //                     </div>
+//     //                 </form>
+//     //             </div>`
+//     //     parentDiv.appendChild(htmlString)
+			
+//     // })
+// }
+
+function displayModifyEmployee(){
+	var parentDiv = document.getElementById("modifyEmployee")
+	parentDiv.classList.add("columnDiv")
+
+	while(parentDiv.firstChild){parentDiv.removeChild(parentDiv.firstChild)}
+	allEmployeeArr.forEach(el => {
+		var rowDiv = document.createElement('div')
+		rowDiv.classList.add("rowDiv", "saleElMargin")
+
+		var formEl = document.createElement('form')
+		formEl.action = "/modifyEmployee"
+		formEl.method = "POST"
+		formEl.enctype = "application/x-www-form-urlencoded"
+
+
+		var firstNameDiv = document.createElement('div')
+		firstNameDiv.classList.add("saleElMargin")
+		var fnameLabel = document.createElement('label')
+		fnameLabel.appendChild(document.createTextNode("First Name"))
+		var fnameInput = document.createElement('input')
+		fnameInput.type = "text"
+		fnameInput.name = "fname"
+		fnameInput.value = el.fname;
+		fnameLabel.appendChild(fnameInput)
+		firstNameDiv.appendChild(fnameLabel)
+		rowDiv.appendChild(firstNameDiv)
+
+		var lastNameDiv = document.createElement('div')
+		lastNameDiv.classList.add("saleElMargin")
+		var lnameLabel = document.createElement('label')
+		lnameLabel.appendChild(document.createTextNode("Last Name"))
+		var lnameInput = document.createElement('input')
+		lnameInput.type = "text"
+		lnameInput.name = "lname"
+		lnameInput.value = el.lname;
+		lnameLabel.appendChild(lnameInput)
+		lastNameDiv.appendChild(lnameLabel)
+		rowDiv.appendChild(lastNameDiv)
+
+		var emailDiv = document.createElement('div')
+		emailDiv.classList.add("saleElMargin")
+		var emailLabel = document.createElement('label')
+		emailLabel.appendChild(document.createTextNode("Email"))
+		var emailInput = document.createElement('input')
+		emailInput.type = "email"
+		emailInput.value = el.email
+		emailInput.name = "email"
+		emailLabel.appendChild(emailInput)
+		emailDiv.appendChild(emailLabel)
+		rowDiv.appendChild(emailDiv)
+
+		// var passwordDiv = document.createElement('div')
+		// passwordDiv.classList.add("saleElMargin")
+		// var passwordLabel = document.createElement('label')
+		// passwordLabel.appendChild(document.createTextNode("Password"))
+		// var passwordInput = document.createElement('input')
+		// passwordInput.type = "password"
+		// passwordLabel.appendChild(passwordInput)
+		// passwordDiv.appendChild(passwordLabel)
+		// rowDiv.appendChild(passwordDiv)
+
+		var hiddenId = document.createElement('input')
+		hiddenId.type = "hidden"
+		hiddenId.value = el._id
+		hiddenId.name = "id"
+		rowDiv.appendChild(hiddenId)
+
+		var submitDiv = document.createElement('div')
+		submitDiv.classList.add("saleElMargin")
+		var submitEl = document.createElement('input')
+		submitEl.type = "submit"
+		submitDiv.appendChild(submitEl)
+		rowDiv.appendChild(submitDiv)
+
+		formEl.appendChild(rowDiv)
+		parentDiv.appendChild(formEl)
+
+	})
+}
+
 // function receiveOrder(){
 //     // I got this item and this is the amount of it i goG
 //     var receiveOrderDiv = document.getElementById("receiveOrder")
@@ -394,7 +475,16 @@ async function changeChosenLocation(el){
 		.then(json => {
 			allItemsArr = json.items;
 		})
+
 	displayItems();
+	displayEditItem()
+
+	await fetch('/getEmployees')
+		.then(response => (response.json()))
+		.then(json => {
+			allEmployeeArr = json.employees;
+		})
+	displayModifyEmployee()
 }
 
 window.onload = async () => {
@@ -421,15 +511,26 @@ window.onload = async () => {
 			allItemsArr = json.items;
 		})
 
+	await fetch('/getEmployees')
+		.then(response => (response.json()))
+		.then(json => {
+			console.log("allEmployee")
+			console.log(json.employees)
+			allEmployeeArr = json.employees;
+		})
+
 	displayItems();
 	displayLocations();
 	displayCustomers();
-	displayEditItem(allItemsArr)
+	displayEditItem()
 	document.getElementById("editItemDiv").style.display = "none"
 	document.getElementById("addItemDiv").style.display = "none"
 	document.getElementById("receiveOrder").style.display = "none"
 	document.getElementById("addEmployee").style.display = "none"
+	document.getElementById("addLocation").style.display = "none"
+	document.getElementById("modifyEmployee").style.display = "none"
 	displayReceiveOrderItems(allItemsArr);
+	displayModifyEmployee()
 }
 
 document.getElementById("editItemButton").addEventListener("click", () => {
@@ -470,6 +571,24 @@ document.getElementById("findItem").addEventListener("keyup", (e) => {
 
 document.getElementById("addEmployeeSelector").addEventListener("click", () => {
 	var hiddenEl = document.getElementById("addEmployee");
+	if(hiddenEl.style.display == "none"){
+		hiddenEl.style.display = "flex"
+	}else{
+		hiddenEl.style.display = "none"
+	}
+})
+
+document.getElementById("addLocationSelector").addEventListener("click", () => {
+	var hiddenEl = document.getElementById("addLocation")
+	if(hiddenEl.style.display == "none"){
+		hiddenEl.style.display = "flex"
+	}else{
+		hiddenEl.style.display = "none"
+	}
+})
+
+document.getElementById("modifyEmployeeSelector").addEventListener("click", () => {
+	var hiddenEl = document.getElementById("modifyEmployee")
 	if(hiddenEl.style.display == "none"){
 		hiddenEl.style.display = "flex"
 	}else{

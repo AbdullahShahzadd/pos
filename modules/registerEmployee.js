@@ -13,4 +13,6 @@ module.exports.addEmployee = async function(locationId, inLname, inFname, inPass
 		role: inRole,
 		locations: locationId
 	})
+	var employees = await Admin.find({locations: locationId})
+	return employees;
 }

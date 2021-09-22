@@ -52,7 +52,7 @@ function ensureAdmin(req, res, next){
 }
 
 app.get("/", (req, res) => {
-	res.redirect('/login')
+	res.redirect("/login");
 })
 app.get("/login", async (req, res) => {
 	res.render("login.handlebars", {
