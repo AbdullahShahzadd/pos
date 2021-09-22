@@ -88,6 +88,12 @@ app.get("/sale", ensureLogin, async (req, res) => {
 	});
 });
 
+app.get("/reports", ensureLogin, async (req, res) => {
+	res.render("chart.handlebars", {
+		layout: false,
+		user: req.session.user
+	})
+})
 
 app.get("/getItems", ensureLogin, async (req, res) => {
 	var itemsArr = await Item.find({locations: req.session.user.chosenLocation._id}).lean();
