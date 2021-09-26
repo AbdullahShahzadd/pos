@@ -9,19 +9,7 @@
 		{{> headerMenu}}
 		<div class="rowDiv bodyDiv">
 			<div id="saleDiv" class="columnDiv roundBorder">
-				<div>
-					<label for="saleCustSearchBar" class="saleElMargin">Search for Customer</label>
-					<input type="text" class="saleElMargin roundBorder" id="saleCustSearchBar" name="saleCustSearchBar">
-				</div>
-				<div class="roundBorder saleElMargin">
-					<div class="rowDiv">
-						<div class="saleElMargin"><strong>First Name</strong></div>
-						<div class="saleElMargin"><strong>Last Name</strong></div>
-						<div class="saleElMargin"><strong>Email</strong></div>
-					</div>
-					<div id="saleCustList"></div>
-				</div>
-				<div class="rowDiv">
+								<div class="rowDiv">
 					<div id="searchDiv">
 						<label for="searchBar" class="saleElMargin">Item Search</label><br>
 						<input type="text" class="saleElMargin roundBorder" id="searchBar" placeholder="Search ...">
@@ -43,7 +31,6 @@
 					</div>
 					<div id="itemListDiv" class="saleElMargin"></div>
 				</div>
-				<div id="displayChosenCustomer" class="saleElMargin"></div>
 				<div class="rowDiv">
 					<div class="saleElMargin">Balance Remaining: <span id="balanceRemaining" name="balanceRemaining">0</span></div>
 					<div>
@@ -71,13 +58,9 @@
 								<label for="cash" class="saleElMargin">Cash</label><br>
 								<input type="number" name="cash" id="cash" class="saleElMargin roundBorder" >
 							</div>
-								<div>
-									<input type="text" name="chosenCustEmail" id="chosenCustEmail" hidden>
-								</div>
 						</div>
 							<input type="hidden" id="receiptDiscount" name="receiptDiscount">
 							<input type="hidden" id="receiptSubmitTotal" name="receiptSubmitTotal" value="0">
-							<input type="hidden" id="chosenCustId" name="chosenCustId">
 							<input type="hidden" id="itemLocation" name="itemLocation">
 							<input type="hidden" id="receiptBalanceRemaining" name="receiptBalanceRemaining">
 						<div>

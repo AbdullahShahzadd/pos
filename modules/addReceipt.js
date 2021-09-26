@@ -2,7 +2,7 @@ const Receipt = require("../models/receipt");
 const Location = require("../models/location")
 const Item = require("../models/item")
 
-module.exports.receipt = async function(itemIdArr, recDiscount, recTotal, recLocation, recCust){
+module.exports.receipt = async function(itemIdArr, recDiscount, recTotal, recLocation){
 	var itemIds = [];
 	itemIdArr.forEach(async (el) => {
 		itemIds.push(el._id)
@@ -15,7 +15,6 @@ module.exports.receipt = async function(itemIdArr, recDiscount, recTotal, recLoc
 		discount: (recDiscount * 1),
 		total: recTotal,
 		locations: recLocation._id,
-		customer: recCust,
 		items: itemIds
 	})
 

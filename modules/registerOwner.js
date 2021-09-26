@@ -1,6 +1,5 @@
 const Admin = require("../models/admin");
 const Location = require("../models/location");
-const Customer = require("../models/customer")
 var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10)
 
@@ -17,11 +16,6 @@ module.exports.addOwner = async function(sName, sNum, postal, city, province, co
 		receiptNum: 1000
 	})
 
-	await Customer.create({
-		fname: "general",
-		email: "general@general.com",
-		locations: chosenLocation._id
-	})
 
 	var admin = await Admin.create({
 		fname: oFName,
