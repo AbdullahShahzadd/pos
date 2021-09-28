@@ -18,6 +18,7 @@ var insertLocationMod = require("./modules/insertLocation")
 var checkRegistrationMod = require("./modules/validateRegistration")
 var editItemMod = require("./modules/editItem")
 var modifyMod = require("./modules/modify")
+var testCreateMod = require("./modules/createExample")
 
 const HTTP_PORT = process.env.PORT || 8080;
 
@@ -54,6 +55,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/login", async (req, res) => {
+	
 	res.render("login.handlebars", {
 		layout: false
 	})
@@ -65,10 +67,10 @@ app.get("/logout", ensureLogin, (req, res) => {
 })
 
 app.get("/dashboard", ensureLogin, (req, res) => {
-		res.render("adminDashboard.handlebars", {
-			layout: false,
-			user: req.session.user
-		})
+	res.render("adminDashboard.handlebars", {
+		layout: false,
+		user: req.session.user
+	})
 })
 
 
@@ -91,6 +93,15 @@ app.get("/getItems", ensureLogin, async (req, res) => {
 	res.json({items: itemsArr});
 })
 
+app.get("/getReceipts", ensureLogin, async (req, res) => {
+	var receiptArr = await Receipt.find({locations: req.session.user.chosenLocation._id})
+	.populate({path: 'items', model: Item}).lean();
+	console.log(receiptArr[0])
+	console.log(receiptArr.length)
+	console.log("in getReceipts")
+	res.json({receipts: receiptArr})
+})
+
 
 app.get("/getLocations",ensureLogin, (req, res) => {
 	var locationsArr = req.session.user.locations;
@@ -98,10 +109,10 @@ app.get("/getLocations",ensureLogin, (req, res) => {
 	res.json({locations: locationsArr, chosenLocation: chosen})
 })
 
-app.get("/getSaleHistory", ensureLogin, async (req, res) => {
-	var receiptArr = await Receipt.find({locations: req.session.user.chosenLocation._id}).lean();
-	res.json({receipts: receiptArr})
-})
+// app.get("/getSaleHistory", ensureLogin, async (req, res) => {
+//     var receiptArr = await Receipt.find({locations: req.session.user.chosenLocation._id}).lean();
+//     res.json({receipts: receiptArr})
+// })
 
 app.get("/register", (req, res) => {
 	res.render("registration.handlebars", {
