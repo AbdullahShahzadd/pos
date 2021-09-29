@@ -299,6 +299,26 @@ async function changeChosenLocation(el){
 }
 
 window.onload = async () => {
+	var editItemExpander = document.getElementById('editItemExpand');
+	var plusSign = document.createElement('h2')
+	plusSign.appendChild(document.createTextNode("+"))
+	editItemExpander.appendChild(plusSign)
+
+	var receiveOrderExpander = document.getElementById('receiveOrderExpand')
+	var plusSign = document.createElement('h2')
+	plusSign.appendChild(document.createTextNode("+"))
+	receiveOrderExpander.appendChild(plusSign)
+
+	var addItemExpander = document.getElementById('addItemExpand')
+	var plusSign = document.createElement('h2')
+	plusSign.appendChild(document.createTextNode("+"))
+	addItemExpander.appendChild(plusSign)
+	
+	var addLocationExpander = document.getElementById('addLocationExpand')
+	var plusSign = document.createElement('h2')
+	plusSign.appendChild(document.createTextNode("+"))
+	addLocationExpander.appendChild(plusSign)
+
 	await fetch('/getLocations')
 		.then(response => (response.json()))
 		.then(json => {
@@ -329,28 +349,52 @@ window.onload = async () => {
 
 document.getElementById("editItemButton").addEventListener("click", () => {
 	var hiddenEl = document.getElementById("editItemDiv")
+	var expanderSign = document.getElementById('editItemExpand')
+	while(expanderSign.firstChild){expanderSign.removeChild(expanderSign.firstChild)}
 	if(hiddenEl.style.display == "none"){
 		hiddenEl.style.display = "flex"
+		var minusSign = document.createElement('h2')
+		minusSign.appendChild(document.createTextNode("-"))
+		expanderSign.appendChild(minusSign)
 	}else{
 		hiddenEl.style.display = "none"
+		var plusSign = document.createElement('h2')
+		plusSign.appendChild(document.createTextNode("+"))
+		expanderSign.appendChild(plusSign)
 	}
 })
 
 document.getElementById("addItemSelector").addEventListener("click", () => {
 	var hiddenEl = document.getElementById("addItemDiv");
+	var expanderSign = document.getElementById('addItemExpand')
+	while(expanderSign.firstChild){expanderSign.removeChild(expanderSign.firstChild)}
 	if(hiddenEl.style.display == "none"){
 		hiddenEl.style.display = "flex"
+		var minusSign = document.createElement('h2')
+		minusSign.appendChild(document.createTextNode("-"))
+		expanderSign.appendChild(minusSign)
 	}else{
 		hiddenEl.style.display = "none"
+		var plusSign = document.createElement('h2')
+		plusSign.appendChild(document.createTextNode("+"))
+		expanderSign.appendChild(plusSign)
 	}
 })
 
 document.getElementById("receiveOrderSelector").addEventListener("click", () => {
 	var hiddenEl = document.getElementById("receiveOrder");
+	var expanderSign = document.getElementById('receiveOrderExpand')
+	while(expanderSign.firstChild){expanderSign.removeChild(expanderSign.firstChild)}
 	if(hiddenEl.style.display == "none"){
 		hiddenEl.style.display = "block"
+		var minusSign = document.createElement('h2')
+		minusSign.appendChild(document.createTextNode("-"))
+		expanderSign.appendChild(minusSign)
 	}else{
 		hiddenEl.style.display = "none"
+		var plusSign = document.createElement('h2')
+		plusSign.appendChild(document.createTextNode("+"))
+		expanderSign.appendChild(plusSign)
 	}
 
 })
@@ -366,10 +410,19 @@ document.getElementById("findItem").addEventListener("keyup", (e) => {
 
 document.getElementById("addLocationSelector").addEventListener("click", () => {
 	var hiddenEl = document.getElementById("addLocation")
+	var expanderSign = document.getElementById('addLocationExpand');
+	while(expanderSign.firstChild){expanderSign.removeChild(expanderSign.firstChild)}
+
 	if(hiddenEl.style.display == "none"){
 		hiddenEl.style.display = "flex"
+		var minusSign = document.createElement('h2')
+		minusSign.appendChild(document.createTextNode("-"))
+		expanderSign.appendChild(minusSign)
 	}else{
 		hiddenEl.style.display = "none"
+		var plusSign = document.createElement('h2')
+		plusSign.appendChild(document.createTextNode("+"))
+		expanderSign.appendChild(plusSign)
 	}
 })
 

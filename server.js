@@ -150,6 +150,8 @@ app.post("/loginUser", async (req, res) => {
 		console.log(req.session.user.chosenLocation._id)
 		req.session.save;
 		res.redirect("/dashboard")
+	}else{
+		res.redirect("/login")
 	}
 })
 
