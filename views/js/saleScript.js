@@ -1,9 +1,7 @@
 var receiptItemArr = [];
 var allItemsArr = [];
-var allCustArr = [];
 var allLocationsArr = [];
 var chosenLocation;
-var chosenCust;
 
 function displayLocations(){
 	
@@ -66,16 +64,7 @@ async function changeChosenLocation(el){
 				allItemsArr.push(el);
 		})
 		})
-	allCustArr = [];
 
-	await fetch('/getCustomers')
-		.then(response => (response.json()))
-		.then(json => {
-			json.customers.forEach(el => {
-				allCustArr.push(el);
-			})
-		})
-	displayCust(allCustArr)
 	displayItems(allItemsArr);
 }
 
@@ -93,53 +82,6 @@ async function changeChosenLocation(el){
 //     displayLocations()
 // }
 
-function displayCust(custArr){
-	var parentDiv = document.getElementById('saleCustList');
-	while(parentDiv.firstChild){parentDiv.removeChild(parentDiv.firstChild);}
-	custArr.forEach(el => {
-		var rowDiv = document.createElement('div');
-		rowDiv.classList.add("rowDiv", "saleElMargin");
-
-		var fnameDiv = document.createElement('div');
-		fnameDiv.classList.add("saleElMargin");
-		fnameDiv.appendChild(document.createTextNode(el.fname));
-		rowDiv.appendChild(fnameDiv);
-
-		var lnameDiv = document.createElement('div');
-		lnameDiv.classList.add("saleElMargin");
-		lnameDiv.appendChild(document.createTextNode(el.lname));
-		rowDiv.appendChild(lnameDiv);
-
-		var emailDiv = document.createElement('div');
-		emailDiv.classList.add("saleElMargin");
-		emailDiv.appendChild(document.createTextNode(el.email));
-		rowDiv.appendChild(emailDiv);
-
-		var chooseCustDiv = document.createElement('div');
-		chooseCustDiv.classList.add("saleElMargin");
-		var chooseCustButton = document.createElement('button');
-		chooseCustButton.appendChild(document.createTextNode("Choose"))
-		chooseCustButton.onclick = function() { 
-			var displayChosenCust = document.getElementById('displayChosenCustomer');
-			while(displayChosenCust.firstChild){displayChosenCust.removeChild(displayChosenCust.firstChild)}
-			displayChosenCust.appendChild(document.createTextNode(`Selected Customer: ${el.fname}`))
-			document.getElementById('chosenCustId').value = el._id;
-		}
-		chooseCustDiv.appendChild(chooseCustButton);
-		rowDiv.appendChild(chooseCustDiv)
-
-		parentDiv.appendChild(rowDiv);
-	})
-}
-
-function filterCust(filterStr){
-	var parentDiv = document.getElementById('saleCustList');
-	while(parentDiv.firstChild){parentDiv.removeChild(parentDiv.firstChild);}
-	var filteredCustArr = allCustArr.filter(el => {
-		return el.fname.includes(filterStr) || el.lname.includes(filterStr) || el.email.includes(filterStr);
-	})
-		displayCust(filteredCustArr);
-}
 
 function updateBalanceRemaining(subtractThis){
 	var balanceRemainingDiv = document.getElementById('balanceRemaining');
@@ -201,7 +143,6 @@ function removeButtonFunc(el){
 }
 		
 var addToReceipt = function(el){
-	console.log("in addToReceipt")
 	var formDisplay = document.getElementById('formDiv');
 	if(formDisplay.style.display == "none"){formDisplay.style.display = "block"}
 	var elNotAdded = new Boolean(true);
@@ -379,13 +320,6 @@ window.onload = async () => {
 		})
 		})
 
-	await fetch('/getCustomers')
-		.then(response => (response.json()))
-		.then(json => {
-			json.customers.forEach(el => {
-				allCustArr.push(el);
-			})
-		})
 	// await fetch('/getLocations')
 	//     .then(response => (response.json()))
 	//     .then(json => {
@@ -408,15 +342,7 @@ window.onload = async () => {
 	displayLocations()
 
 
-	displayCust(allCustArr)
 	displayItems(allItemsArr);
-	var displayChosenCust = document.getElementById('displayChosenCustomer');
-	displayChosenCust.appendChild(document.createTextNode(`Selected Customer: General`))
-// get general customer from allCustArr and make id=chosencustObj value = the general cust orrr id maybe, inspect everything and figure it out
-	var chosenCust = allCustArr.find(el => {
-		return el.fname == "General";
-	})
-	document.getElementById('chosenCustId').value = chosenCust._id;
 }
 
 document.getElementById('searchBar').addEventListener('keyup', (e) => {
@@ -485,10 +411,8 @@ document.getElementById('submitReceiptArr').addEventListener('click', (e) => {
 		e.preventDefault()
 	}else if((document.getElementById('balanceRemaining').innerText * 1) > 0){
 		e.preventDefault()
+		
 	}
 })
 
-document.getElementById('saleCustSearchBar').addEventListener('keyup', function(){
-	filterCust(e.target.value);
-})
 

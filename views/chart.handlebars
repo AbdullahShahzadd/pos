@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Sales</title>
+		<title>Reports</title>
 		<link rel="stylesheet" type="text/css" href="./css/style.css">
 	</head>
 
 	<body>
 		{{> headerMenu}}
+		<!-- add shadow border and animation on hover -->
+		<!-- center chart -->
+		<div id="yearlySaleProfitSelector" class="selectorDiv">
+			<div><h2 class="centerText">Yearly Sale</h2></div>
+			<div id="yearlySaleProfitSelectorExpand" class="lrpad15px"></div>
+		</div>
+		<div id="yearlySaleProfit">
+		<canvas id="yearSaleChart"></canvas>
+		</div>
+		<div id="monthlySaleProfitSelector" class="selectorDiv">
+			<div><h2 class="centerText">Monthly Sale</h2></div>
+			<div id="monthlySaleProfitSelectorExpand" class="lrpad15px"></div>
+		</div>
+		<div id="monthlySaleProfit">
+			<div>
+			<div id="monthSelection">
+				<div id="janMonth" class="monthSelectDiv">January</div>
+				<div id="febMonth" class="monthSelectDiv">February</div>
+				<div id="marMonth" class="monthSelectDiv">March</div>
+				<div id="aprMonth" class="monthSelectDiv">April</div>
+				<div id="mayMonth" class="monthSelectDiv">May</div>
+				<div id="junMonth" class="monthSelectDiv">June</div>
+				<div id="julMonth" class="monthSelectDiv">July</div>
+				<div id="augMonth" class="monthSelectDiv">August</div>
+				<div id="septMonth" class="monthSelectDiv">September</div>
+				<div id="octMonth" class="monthSelectDiv">October</div>
+				<div id="novMonth" class="monthSelectDiv">November</div>
+				<div id="decMonth" class="monthSelectDiv">December</div>
+			</div><br>
+			</div>
+			<div id="monthlySaleChart" style="width: 800px; height: 400px; display: block;">
+			</div>
+		</div>
 	</body>
-	<script src="./js/reportScript.js" type="text/javascript"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+	<script src="./js/chartScript.js"></script>
+
 </html>

@@ -1,8 +1,6 @@
 var allLocationsArr = [];
 var chosenLocation;
-var allCustomerArr = [];
 var allItemsArr = [];
-var allEmployeeArr = [];
 
 function displayItems(){
 
@@ -59,63 +57,6 @@ function displayItems(){
 		itemDiv.appendChild(noItemDiv)
 	}
 
-}
-
-function displayCustomers(){
-	var custDiv = document.getElementById('custDiv');
-	while(custDiv.firstChild){custDiv.removeChild(custDiv.firstChild);}
-	var chosenLocationName;
-	chosenLocation.name ?  chosenLocationName = chosenLocation.name : chosenLocationName = chosenLocation.streetName;
-	var custLocationMessage = document.createElement('h4')
-	custLocationMessage.classList.add("customerHeader")
-	custLocationMessage.appendChild(document.createTextNode(`Customers at ${chosenLocationName}: `))
-	custDiv.appendChild(custLocationMessage)
-
-	if(allCustomerArr.length > 0){
-		var rowDiv = document.createElement('div');
-		rowDiv.classList.add("rowDiv", "saleElMargin");
-		var firstNameDiv = document.createElement('div');
-		firstNameDiv.classList.add("saleElMargin", "custName")
-		firstNameDiv.appendChild(document.createTextNode("First Name"))
-		rowDiv.appendChild(firstNameDiv);
-		
-		var lastNameDiv = document.createElement('div');
-		lastNameDiv.classList.add("saleElMargin", "custName")
-		lastNameDiv.appendChild(document.createTextNode("Last Name"));
-		rowDiv.appendChild(lastNameDiv);
-
-		var emailDiv = document.createElement('div');
-		emailDiv.classList.add("saleElMargin", "custEmail")
-		emailDiv.appendChild(document.createTextNode("Email"));
-		rowDiv.appendChild(emailDiv);
-		custDiv.appendChild(rowDiv);
-
-		allCustomerArr.forEach(el => {
-			var rowDiv = document.createElement('div');
-			rowDiv.classList.add("rowDiv", "saleElMargin");
-
-			var fnameDiv = document.createElement('div');
-			fnameDiv.classList.add("saleElMargin", "custName");
-			fnameDiv.appendChild(document.createTextNode(el.fname));
-			rowDiv.appendChild(fnameDiv);
-
-			var lnameDiv = document.createElement('div');
-			lnameDiv.classList.add("saleElMargin", "custName");
-			lnameDiv.appendChild(document.createTextNode(el.lname));
-			rowDiv.appendChild(lnameDiv);
-
-			var emailDiv = document.createElement('div');
-			emailDiv.classList.add("saleElMargin", "custEmail");
-			emailDiv.appendChild(document.createTextNode(el.email));
-			rowDiv.appendChild(emailDiv);
-
-			custDiv.appendChild(rowDiv);
-		})
-	}else{
-		var noCustDiv = document.createElement('div');
-		noCustDiv.appendChild(document.createTextNode("No customers to display for this location"))
-		custDiv.appendChild(noCustDiv)
-	}
 }
 
 function displayLocations(){
@@ -329,122 +270,6 @@ function displayReceiveOrderItems(itemArr){
 }
 
 
-// function displayModifyEmployee(){
-//     var parentDiv = document.getElementById("modifyEmployee")
-//     var htmlString = `<div>hello</div>`
-//     parentDiv.appendChild(htmlString)
-//     // allEmployeeArr.forEach(el => {
-//     // var htmlString = `<div class="rowDiv">
-//     // hello
-//     //                 <form action="/editEmployee" method="POST" enctype="application/x-www-form-urlencoded">
-//     //                     <div>
-//     //                         <label for="fname">First Name</label>
-//     //                         <input type="text" name="fname" value="${el.fname}" required>
-//     //                     </div>
-//     //                     <div>
-//     //                         <label for="lName">Last Name</label>
-//     //                         <input type="text" name="lname" value="${el.lname}" required>
-//     //                     </div>
-//     //                     <div>
-//     //                         <label for="email">Email</label>
-//     //                         <input type="email" name="email" value="${el.email}" required>
-//     //                     </div>
-//     //                     <div>
-//     //                         <label for="password">Password</label>
-//     //                         <input type="password" name="password" required>
-//     //                     </div>
-//     //                 </form>
-//     //             </div>`
-//     //     parentDiv.appendChild(htmlString)
-			
-//     // })
-// }
-
-function displayModifyEmployee(){
-	var parentDiv = document.getElementById("modifyEmployee")
-	parentDiv.classList.add("columnDiv")
-
-	while(parentDiv.firstChild){parentDiv.removeChild(parentDiv.firstChild)}
-	allEmployeeArr.forEach(el => {
-		var rowDiv = document.createElement('div')
-		rowDiv.classList.add("rowDiv", "saleElMargin")
-
-		var formEl = document.createElement('form')
-		formEl.action = "/modifyEmployee"
-		formEl.method = "POST"
-		formEl.enctype = "application/x-www-form-urlencoded"
-
-
-		var firstNameDiv = document.createElement('div')
-		firstNameDiv.classList.add("saleElMargin")
-		var fnameLabel = document.createElement('label')
-		fnameLabel.appendChild(document.createTextNode("First Name"))
-		var fnameInput = document.createElement('input')
-		fnameInput.type = "text"
-		fnameInput.name = "fname"
-		fnameInput.value = el.fname;
-		fnameLabel.appendChild(fnameInput)
-		firstNameDiv.appendChild(fnameLabel)
-		rowDiv.appendChild(firstNameDiv)
-
-		var lastNameDiv = document.createElement('div')
-		lastNameDiv.classList.add("saleElMargin")
-		var lnameLabel = document.createElement('label')
-		lnameLabel.appendChild(document.createTextNode("Last Name"))
-		var lnameInput = document.createElement('input')
-		lnameInput.type = "text"
-		lnameInput.name = "lname"
-		lnameInput.value = el.lname;
-		lnameLabel.appendChild(lnameInput)
-		lastNameDiv.appendChild(lnameLabel)
-		rowDiv.appendChild(lastNameDiv)
-
-		var emailDiv = document.createElement('div')
-		emailDiv.classList.add("saleElMargin")
-		var emailLabel = document.createElement('label')
-		emailLabel.appendChild(document.createTextNode("Email"))
-		var emailInput = document.createElement('input')
-		emailInput.type = "email"
-		emailInput.value = el.email
-		emailInput.name = "email"
-		emailLabel.appendChild(emailInput)
-		emailDiv.appendChild(emailLabel)
-		rowDiv.appendChild(emailDiv)
-
-		// var passwordDiv = document.createElement('div')
-		// passwordDiv.classList.add("saleElMargin")
-		// var passwordLabel = document.createElement('label')
-		// passwordLabel.appendChild(document.createTextNode("Password"))
-		// var passwordInput = document.createElement('input')
-		// passwordInput.type = "password"
-		// passwordLabel.appendChild(passwordInput)
-		// passwordDiv.appendChild(passwordLabel)
-		// rowDiv.appendChild(passwordDiv)
-
-		var hiddenId = document.createElement('input')
-		hiddenId.type = "hidden"
-		hiddenId.value = el._id
-		hiddenId.name = "id"
-		rowDiv.appendChild(hiddenId)
-
-		var submitDiv = document.createElement('div')
-		submitDiv.classList.add("saleElMargin")
-		var submitEl = document.createElement('input')
-		submitEl.type = "submit"
-		submitDiv.appendChild(submitEl)
-		rowDiv.appendChild(submitDiv)
-
-		formEl.appendChild(rowDiv)
-		parentDiv.appendChild(formEl)
-
-	})
-}
-
-// function receiveOrder(){
-//     // I got this item and this is the amount of it i goG
-//     var receiveOrderDiv = document.getElementById("receiveOrder")
-
-// }
 async function changeChosenLocation(el){
 	var chosenLocationDiv = document.getElementById("chosenLocationDisplayDiv");
 	while(chosenLocationDiv.firstChild){chosenLocationDiv.removeChild(chosenLocationDiv.firstChild);}
@@ -453,7 +278,6 @@ async function changeChosenLocation(el){
 	el.name ?  locationName = el.name : locationName = el.streetName;
 	chosenLocationDiv.appendChild(document.createTextNode(`Location: ${locationName}`))
 	var data = {el}
-	document.getElementById("locationToRegisterEmp").value = el._id
 
 	await fetch('/changeChosenLocation', {
 		method: 'POST',
@@ -461,14 +285,7 @@ async function changeChosenLocation(el){
 		body: JSON.stringify({data})
 	})
 
-	allCustomerArr = [];
 
-	await fetch('/getCustomers')
-		.then(response => (response.json()))
-		.then(json => {
-			allCustomerArr = json.customers;
-		})
-	displayCustomers();
 
 	await fetch('getItems')
 		.then(response => (response.json()))
@@ -479,15 +296,29 @@ async function changeChosenLocation(el){
 	displayItems();
 	displayEditItem()
 
-	await fetch('/getEmployees')
-		.then(response => (response.json()))
-		.then(json => {
-			allEmployeeArr = json.employees;
-		})
-	displayModifyEmployee()
 }
 
 window.onload = async () => {
+	var editItemExpander = document.getElementById('editItemExpand');
+	var plusSign = document.createElement('h2')
+	plusSign.appendChild(document.createTextNode("+"))
+	editItemExpander.appendChild(plusSign)
+
+	var receiveOrderExpander = document.getElementById('receiveOrderExpand')
+	var plusSign = document.createElement('h2')
+	plusSign.appendChild(document.createTextNode("+"))
+	receiveOrderExpander.appendChild(plusSign)
+
+	var addItemExpander = document.getElementById('addItemExpand')
+	var plusSign = document.createElement('h2')
+	plusSign.appendChild(document.createTextNode("+"))
+	addItemExpander.appendChild(plusSign)
+	
+	var addLocationExpander = document.getElementById('addLocationExpand')
+	var plusSign = document.createElement('h2')
+	plusSign.appendChild(document.createTextNode("+"))
+	addLocationExpander.appendChild(plusSign)
+
 	await fetch('/getLocations')
 		.then(response => (response.json()))
 		.then(json => {
@@ -497,12 +328,6 @@ window.onload = async () => {
 			// console.log(json.locations)
 			allLocationsArr = json.locations;
 			chosenLocation = json.chosenLocation
-			document.getElementById("locationToRegisterEmp").value = json.chosenLocation._id
-		})
-	await fetch('/getCustomers')
-		.then(response => (response.json()))
-		.then(json => {
-			allCustomerArr = json.customers;
 		})
 
 	await fetch('getItems')
@@ -511,52 +336,65 @@ window.onload = async () => {
 			allItemsArr = json.items;
 		})
 
-	await fetch('/getEmployees')
-		.then(response => (response.json()))
-		.then(json => {
-			console.log("allEmployee")
-			console.log(json.employees)
-			allEmployeeArr = json.employees;
-		})
 
 	displayItems();
 	displayLocations();
-	displayCustomers();
 	displayEditItem()
 	document.getElementById("editItemDiv").style.display = "none"
 	document.getElementById("addItemDiv").style.display = "none"
 	document.getElementById("receiveOrder").style.display = "none"
-	document.getElementById("addEmployee").style.display = "none"
 	document.getElementById("addLocation").style.display = "none"
-	document.getElementById("modifyEmployee").style.display = "none"
 	displayReceiveOrderItems(allItemsArr);
-	displayModifyEmployee()
 }
 
 document.getElementById("editItemButton").addEventListener("click", () => {
 	var hiddenEl = document.getElementById("editItemDiv")
+	var expanderSign = document.getElementById('editItemExpand')
+	while(expanderSign.firstChild){expanderSign.removeChild(expanderSign.firstChild)}
 	if(hiddenEl.style.display == "none"){
 		hiddenEl.style.display = "flex"
+		var minusSign = document.createElement('h2')
+		minusSign.appendChild(document.createTextNode("-"))
+		expanderSign.appendChild(minusSign)
 	}else{
 		hiddenEl.style.display = "none"
+		var plusSign = document.createElement('h2')
+		plusSign.appendChild(document.createTextNode("+"))
+		expanderSign.appendChild(plusSign)
 	}
 })
 
 document.getElementById("addItemSelector").addEventListener("click", () => {
 	var hiddenEl = document.getElementById("addItemDiv");
+	var expanderSign = document.getElementById('addItemExpand')
+	while(expanderSign.firstChild){expanderSign.removeChild(expanderSign.firstChild)}
 	if(hiddenEl.style.display == "none"){
 		hiddenEl.style.display = "flex"
+		var minusSign = document.createElement('h2')
+		minusSign.appendChild(document.createTextNode("-"))
+		expanderSign.appendChild(minusSign)
 	}else{
 		hiddenEl.style.display = "none"
+		var plusSign = document.createElement('h2')
+		plusSign.appendChild(document.createTextNode("+"))
+		expanderSign.appendChild(plusSign)
 	}
 })
 
 document.getElementById("receiveOrderSelector").addEventListener("click", () => {
 	var hiddenEl = document.getElementById("receiveOrder");
+	var expanderSign = document.getElementById('receiveOrderExpand')
+	while(expanderSign.firstChild){expanderSign.removeChild(expanderSign.firstChild)}
 	if(hiddenEl.style.display == "none"){
 		hiddenEl.style.display = "block"
+		var minusSign = document.createElement('h2')
+		minusSign.appendChild(document.createTextNode("-"))
+		expanderSign.appendChild(minusSign)
 	}else{
 		hiddenEl.style.display = "none"
+		var plusSign = document.createElement('h2')
+		plusSign.appendChild(document.createTextNode("+"))
+		expanderSign.appendChild(plusSign)
 	}
 
 })
@@ -569,29 +407,22 @@ document.getElementById("findItem").addEventListener("keyup", (e) => {
 	displayReceiveOrderItems(filteredArr)	
 })
 
-document.getElementById("addEmployeeSelector").addEventListener("click", () => {
-	var hiddenEl = document.getElementById("addEmployee");
-	if(hiddenEl.style.display == "none"){
-		hiddenEl.style.display = "flex"
-	}else{
-		hiddenEl.style.display = "none"
-	}
-})
 
 document.getElementById("addLocationSelector").addEventListener("click", () => {
 	var hiddenEl = document.getElementById("addLocation")
+	var expanderSign = document.getElementById('addLocationExpand');
+	while(expanderSign.firstChild){expanderSign.removeChild(expanderSign.firstChild)}
+
 	if(hiddenEl.style.display == "none"){
 		hiddenEl.style.display = "flex"
+		var minusSign = document.createElement('h2')
+		minusSign.appendChild(document.createTextNode("-"))
+		expanderSign.appendChild(minusSign)
 	}else{
 		hiddenEl.style.display = "none"
+		var plusSign = document.createElement('h2')
+		plusSign.appendChild(document.createTextNode("+"))
+		expanderSign.appendChild(plusSign)
 	}
 })
 
-document.getElementById("modifyEmployeeSelector").addEventListener("click", () => {
-	var hiddenEl = document.getElementById("modifyEmployee")
-	if(hiddenEl.style.display == "none"){
-		hiddenEl.style.display = "flex"
-	}else{
-		hiddenEl.style.display = "none"
-	}
-})

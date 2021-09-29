@@ -15,6 +15,7 @@
 	flex-wrap: wrap;
 }
 
+
 /* ------------------- Global Style ---------------------- */
 
 
@@ -22,10 +23,17 @@
 	margin: auto;
 }
 
+.centerText {
+	text-align: center;
+}
+
 .floatRight {
 	float: right;
 }
 
+.lrpad15px {
+	padding: 0px 15px;
+}
 
 .roundBorder {
 	border-radius: 5px;
@@ -35,10 +43,6 @@
 
 .warning {
 	color: red;
-}
-
-body {
-	background-color: #CFDDC8;
 }
 
 
@@ -152,6 +156,18 @@ header{
 
 /* ------------------------------ Sales Div ------------------------ */
 
+.rightShadowDiv {
+    box-shadow: 8px 6px 8px rgba(0, 0, 0, 0.4);
+	margin: 0 50px;
+	border: thin solid black;
+}
+
+.leftShadowDiv {
+    box-shadow: -8px 6px 8px rgba(0, 0, 0, 0.4);
+	margin: 0 50px;
+	border: thin solid black;
+}
+
 #saleDiv {
 	margin: 0px 5px;
 	width: 50%;
@@ -172,7 +188,7 @@ header{
 
 
 #itemListDiv {
-	max-height: 800px;
+	max-height: 400px;
 	overflow-y:auto;
 }
 
@@ -347,4 +363,59 @@ header{
 	margin: auto; 
 	padding: 20px;
 	text-align: center;
+}
+
+
+/* ------------------------------ chart -------------------------- */
+
+.selectorDiv {
+	display:flex;
+	flex-direction:row;
+	align-items: center;
+	justify-content: center;
+    box-shadow: 8px 6px 8px rgba(0, 0, 0, 0.4);
+	width: 80%;
+	margin: 30px auto;
+	border: thin solid black;
+}
+
+.selectorDiv:hover {
+    transition: all .2s;
+    transform: scale(1.2);
+}
+
+.chartDiv {
+	width: 80%;
+	height: 400px;
+	display: flex;
+	justify-content: center;
+}
+
+.monthSelectDiv {
+	border: thin solid black;
+	margin: 0px 15px;
+	padding: 5px;
+}
+
+.monthSelectDiv:hover {
+    transition: all .2s;
+    transform: scale(1.2);
+}
+
+#monthSelection {
+	display:flex;
+	flex-direction:row;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	margin: 30px auto;
+}
+
+#monthlySaleProfit {
+	display:flex;
+	flex-direction:column;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	margin: 30px auto;
 }

@@ -1,6 +1,5 @@
 const Location = require("../models/location");
 const Admin = require("../models/admin")
-const Customer = require("../models/customer")
 
 module.exports.addLocation = async function(locationData, userId){
 	var locationCreated = await Location.create({
@@ -18,11 +17,6 @@ module.exports.addLocation = async function(locationData, userId){
 		$push: {locations: locationCreated._id}
 	})
 
-	await Customer.create({
-		fname: "general",
-		email: "general@general.com",
-		locations: locationCreated._id 
-	})
 	
 	var user = await Admin.findOne({_id: userId}).populate({path: 'locations', model: Location}).lean()
 	return user;
