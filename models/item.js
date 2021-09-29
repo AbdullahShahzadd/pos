@@ -10,6 +10,7 @@ var itemSchema = new Schema({
 	"brand": String,
 	"size": String,
 	"price": Number,
+	"cost": Number,
 	"qty": Number,
 	"locations": {type: mongoose.Types.ObjectId, ref: 'Locations'}
 })

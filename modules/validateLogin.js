@@ -27,10 +27,6 @@ module.exports.validate = async function(loginFormData){
 		user._id = userExists._id;
 		user.locations = userExists.locations;
 		user.role = userExists.role;
-
-		if(user.role == "admin"){
-			user.employees = await Admin.find({locations: user.locations[0]._id})
-		}
 	}
 
 	return user;

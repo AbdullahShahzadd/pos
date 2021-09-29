@@ -10,7 +10,7 @@ var receiptSchema = new Schema({
 	"items": [{type: mongoose.Types.ObjectId, ref: 'Item'}],
 	"total": Number,
 	"discount": Number,
-	"customer": {type: mongoose.Types.ObjectId, ref: 'Customer'},
+	"purchaseDate": Date,
 	"locations": {type: mongoose.Types.ObjectId, ref: 'Locations'}
 })
 

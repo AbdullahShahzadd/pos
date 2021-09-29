@@ -7,19 +7,18 @@ const { check, validationResult } = require('express-validator')
 
 
 var Item = require("./models/item")
-var Customer = require("./models/customer")
 var Admin = require("./models/admin")
+var Receipt = require("./models/receipt")
+var Location = require("./models/location")
 var insertItemMod = require("./modules/insertItem")
-var insertCustMod = require("./modules/insertCustomer")
 var insertOwnerMod = require("./modules/registerOwner")
 var validateLoginMod = require("./modules/validateLogin")
 var insertReceiptMod = require("./modules/addReceipt");
 var insertLocationMod = require("./modules/insertLocation")
 var checkRegistrationMod = require("./modules/validateRegistration")
-var checkValidCustMod = require("./modules/validateCustomer")
 var editItemMod = require("./modules/editItem")
-var insertEmployeeMod = require("./modules/registerEmployee")
 var modifyMod = require("./modules/modify")
+var testCreateMod = require("./modules/createExample")
 
 const HTTP_PORT = process.env.PORT || 8080;
 
@@ -56,6 +55,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/login", async (req, res) => {
+	
 	res.render("login.handlebars", {
 		layout: false
 	})
@@ -67,17 +67,10 @@ app.get("/logout", ensureLogin, (req, res) => {
 })
 
 app.get("/dashboard", ensureLogin, (req, res) => {
-	if(req.session.user.role == "admin"){
-		res.render("adminDashboard.handlebars", {
-			layout: false,
-			user: req.session.user
-		})
-	}else{
-		res.render("genDashboard.handlebars", {
-			layout: false,
-			user: req.session.user
-		})
-	}
+	res.render("adminDashboard.handlebars", {
+		layout: false,
+		user: req.session.user
+	})
 })
 
 
@@ -88,7 +81,7 @@ app.get("/sale", ensureLogin, async (req, res) => {
 	});
 });
 
-app.get("/reports", ensureLogin, async (req, res) => {
+app.get("/reports", async (req, res) => {
 	res.render("chart.handlebars", {
 		layout: false,
 		user: req.session.user
@@ -100,10 +93,15 @@ app.get("/getItems", ensureLogin, async (req, res) => {
 	res.json({items: itemsArr});
 })
 
-app.get("/getCustomers", ensureLogin, async (req, res) => {
-	var customerArr = await Customer.find({locations: req.session.user.chosenLocation._id}).lean().populate('items');
-	res.json({customers: customerArr});
+app.get("/getReceipts", ensureLogin, async (req, res) => {
+	var receiptArr = await Receipt.find({locations: req.session.user.chosenLocation._id})
+	.populate({path: 'items', model: Item}).lean();
+	console.log(receiptArr[0])
+	console.log(receiptArr.length)
+	console.log("in getReceipts")
+	res.json({receipts: receiptArr})
 })
+
 
 app.get("/getLocations",ensureLogin, (req, res) => {
 	var locationsArr = req.session.user.locations;
@@ -111,11 +109,10 @@ app.get("/getLocations",ensureLogin, (req, res) => {
 	res.json({locations: locationsArr, chosenLocation: chosen})
 })
 
-app.get("/getEmployees", ensureLogin, async (req, res) => {
-	var employeesArr = await Admin.find({locations: req.session.user.chosenLocation._id}).lean()
-	res.json({employees: employeesArr})
-})
-
+// app.get("/getSaleHistory", ensureLogin, async (req, res) => {
+//     var receiptArr = await Receipt.find({locations: req.session.user.chosenLocation._id}).lean();
+//     res.json({receipts: receiptArr})
+// })
 
 app.get("/register", (req, res) => {
 	res.render("registration.handlebars", {
@@ -123,11 +120,7 @@ app.get("/register", (req, res) => {
 	})
 })
 
-app.get("/testAddLocation", ensureLogin, (req, res) => {
-	res.render("addLocation.handlebars", {
-		layout: false
-	})
-})
+
 
 // todo figure out how to sanitize the req.body data
 // also what is sanitize????
@@ -154,11 +147,11 @@ app.post("/loginUser", async (req, res) => {
 			role: user.role,
 			chosenLocation: user.locations[0]
 		}
-		if(user.role == "admin"){
-			req.session.user.employees = user.employees
-		}
+		console.log(req.session.user.chosenLocation._id)
 		req.session.save;
 		res.redirect("/dashboard")
+	}else{
+		res.redirect("/login")
 	}
 })
 
@@ -179,7 +172,6 @@ app.post("/registerOwner", async (req, res) => {
 			locations: admin.locations,
 			id: admin._id,
 			role: admin.role,
-			employees: admin.employees,
 			chosenLocation: admin.locations[0]
 		}
 		
@@ -194,7 +186,7 @@ app.post("/registerOwner", async (req, res) => {
 })
 
 app.post("/addItem", ensureLogin, ensureAdmin, async (req, res) => {
-	await insertItemMod.insertItem(req.body.itemName, req.body.itemCategory, req.body.itemBrand, req.body.itemSize, req.body.itemPrice, req.body.itemQty, req.session.user.chosenLocation)
+	await insertItemMod.insertItem(req.body.itemName, req.body.itemCategory, req.body.itemBrand, req.body.itemSize, req.body.itemPrice, req.body.itemCost, req.body.itemQty, req.session.user.chosenLocation)
 	res.redirect("/dashboard");
 })
 
@@ -204,23 +196,10 @@ app.post("/addLocation", ensureLogin, ensureAdmin, async (req, res) => {
 	res.redirect("/dashboard")
 })
 
-app.post("/addCustomer", ensureLogin, ensureAdmin,async (req, res) => {
-	var validCust = await checkValidCustMod.validate(req.session.user.chosenLocation._id, req.body.email)
-	if(validCust){
-		await insertCustMod.createCustomer(req.body, req.session.user.chosenLocation);
-		res.redirect("/dashboard");
-	}else{
-		res.render("adminDashboard.handlebars", {
-			layout: false,
-			user: req.session.user,
-			custAddError: true
-		})
-	}
-})
 
 app.post("/completeSale", ensureLogin, async (req, res) => {
 	var receiptArr = JSON.parse(req.body.submitReceiptArr);
-	insertReceiptMod.receipt(receiptArr, req.body.receiptDiscount, req.body.receiptSubmitTotal, req.session.user.chosenLocation, req.body.chosenCustId);
+	insertReceiptMod.receipt(receiptArr, req.body.receiptDiscount, req.body.receiptSubmitTotal, req.session.user.chosenLocation);
 
 	res.redirect('/sale');
 })
@@ -246,28 +225,7 @@ app.post('/receiveOrder', ensureLogin, async(req,res) => {
 	res.redirect("/dashboard")
 })
 
-app.post('/addEmployee', ensureLogin, ensureAdmin, async (req, res) => {
-	var empData = req.body;
-	var emailPassword = await checkRegistrationMod.check(req.body.empEmail, req.body.empPassword)
-	if(!emailPassword.badEmail && !emailPassword.badPassword){
-		var updatedEmployees = await insertEmployeeMod.addEmployee(req.session.user.chosenLocation, empData.empLName, empData.empFName, empData.empPassword, empData.empEmail, empData.empRole)
-		req.session.user.employees = updatedEmployees;
-		res.redirect("/dashboard")
-	}else{
-		res.render("adminDashboard.handlebars", {
-			layout: false,
-			user: req.session.user,
-			empEmailErr: emailPassword.badEmail,
-			empPasswordErr: emailPassword.badPassword
-		})
-	}
-})
 
-app.post('/modifyEmployee', ensureLogin, ensureAdmin, async (req, res) => {
-	var data = req.body;
-	await modifyMod.employee(data.fname, data.lname, data.email, data.id, req.session.user.chosenLocation._id)
-	res.redirect("/dashboard")
-})
 
 app.listen(HTTP_PORT, function(){
 	console.log("server on: " + HTTP_PORT);
