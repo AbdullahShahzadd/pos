@@ -77,7 +77,7 @@ function yearSaleLineChart(inLabel, inSalesData, inProfitData){
 				x: {
 					type: 'time',
 					time: {
-						unit: 'month'
+ 						unit: 'month'
 					}
 				}
 			}
@@ -101,7 +101,7 @@ function monthlySaleChart(inMonth){
 	for(var i = 0; i < numDays; i++){
 		labels.push(new Date(2021, inMonth, i + 1));
 		sales.push(0)
-		profit.push(0)
+       		profit.push(0)
 		for(var j = 0; j < thisMonthReceipts.length; j++){
 			var elDate = new Date(thisMonthReceipts[j].purchaseDate)
 			if(elDate.getDate() == (i + 1)){
