@@ -99,9 +99,6 @@ app.get("/getItems", ensureLogin, async (req, res) => {
 app.get("/getReceipts", ensureLogin, async (req, res) => {
 	var receiptArr = await Receipt.find({locations: req.session.user.chosenLocation._id})
 	.populate({path: 'items', model: Item}).lean();
-	console.log(receiptArr[0])
-	console.log(receiptArr.length)
-	console.log("in getReceipts")
 	res.json({receipts: receiptArr})
 })
 
@@ -150,7 +147,6 @@ app.post("/loginUser", async (req, res) => {
 			role: user.role,
 			chosenLocation: user.locations[0]
 		}
-		console.log(req.session.user.chosenLocation._id)
 		req.session.save;
 		res.redirect("/dashboard")
 	}else{

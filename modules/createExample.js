@@ -8,13 +8,15 @@ module.exports.createItems = async (locationId) => {
 	var randomVowel = vowels[Math.floor(Math.random() * vowels.length)];
 	var randomConsonant = consonants[Math.floor(Math.random() * consonants.length)];
 	for(var i = 0; i < 100; i++){
+		var costOf = Math.floor(Math.random() * 95) + 5;
+		var sale = costOf * 1.5;
 		Item.create({
 			name: consonants[Math.floor(Math.random() * consonants.length)] + vowels[Math.floor(Math.random() * vowels.length)] + consonants[Math.floor(Math.random() * consonants.length)] + vowels[Math.floor(Math.random() * vowels.length)] + consonants[Math.floor(Math.random() * consonants.length)] + vowels[Math.floor(Math.random() * vowels.length)],
 			category: consonants[Math.floor(Math.random() * consonants.length)] + vowels[Math.floor(Math.random() * vowels.length)] + consonants[Math.floor(Math.random() * consonants.length)] + vowels[Math.floor(Math.random() * vowels.length)] + consonants[Math.floor(Math.random() * consonants.length)] + vowels[Math.floor(Math.random() * vowels.length)] ,
 			brand: consonants[Math.floor(Math.random() * consonants.length)] + vowels[Math.floor(Math.random() * vowels.length)] + consonants[Math.floor(Math.random() * consonants.length)] + vowels[Math.floor(Math.random() * vowels.length)] + consonants[Math.floor(Math.random() * consonants.length)] + vowels[Math.floor(Math.random() * vowels.length)] ,
 			size: i,
-			price: i + 2,
-			cost: i + 1,
+			price: sale,
+			cost: costOf,
 			qty: Math.floor(Math.random() * 100) + 1,
 			locations: locationId
 		})
@@ -23,7 +25,7 @@ module.exports.createItems = async (locationId) => {
 
 
 module.exports.createReceipts = async (locationId) => {
-	Item.find()
+	Item.find({locations: locationId._id})
 		.then(arr => {
 			var arrOfItemArr = [];
 			for(var i = 0; i < 90; i++){
@@ -41,8 +43,6 @@ module.exports.createReceipts = async (locationId) => {
 			return arrOfItemArr;
 		})
 		.then(async (arr) => {
-			console.log("in then")
-			console.log(arr)
 			
 			for(var i = 0; i < arr.length; i++){
 				var idArr = [];
