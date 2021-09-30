@@ -2,9 +2,9 @@ var allLocationsArr = [];
 var chosenLocation;
 var allItemsArr = [];
 
-function displayItems(){
+function displayItems(selectedItems){
 
-	var itemDiv = document.getElementById('itemListDiv');
+	var itemDiv = document.getElementById('dashItemListDiv');
 	while(itemDiv.firstChild){itemDiv.removeChild(itemDiv.firstChild);}
 	var chosenLocationName;
 	chosenLocation.businessName ?  chosenLocationName = chosenLocation.businessName : chosenLocationName = chosenLocation.streetName;
@@ -12,9 +12,9 @@ function displayItems(){
 	while(itemLocationMessageDiv.firstChild){itemLocationMessageDiv.removeChild(itemLocationMessageDiv.firstChild);}
 	itemLocationMessageDiv.appendChild(document.createTextNode(`Items at ${chosenLocationName}: `))
 
-	if(allItemsArr.length > 0){
+	if(selectedItems.length > 0){
 
-		allItemsArr.forEach((el) => {
+		selectedItems.forEach((el) => {
 			var rowDiv = document.createElement('div');
 			rowDiv.classList.add("rowDiv", "itemLineHeight");
 			
@@ -95,12 +95,12 @@ function displayLocations(){
 	}
 }
 
-function displayEditItem(){
-	var editItemParentDiv = document.getElementById('editItemDiv');
+function displayEditItem(selectedItems){
+	var editItemParentDiv = document.getElementById('displayEditItemDiv');
 	editItemParentDiv.classList.add("rowDiv", "saleElMargin")
 	while(editItemParentDiv.firstChild){editItemParentDiv.removeChild(editItemParentDiv.firstChild)}
 	
-	allItemsArr.forEach(el => {
+	selectedItems.forEach(el => {
 		var formDiv = document.createElement('div')
 		formDiv.classList.add("roundBorder", "saleElMargin", "editItemBox")
 
@@ -293,8 +293,8 @@ async function changeChosenLocation(el){
 			allItemsArr = json.items;
 		})
 
-	displayItems();
-	displayEditItem()
+	displayItems(allItemsArr);
+	displayEditItem(allItemsArr)
 
 }
 
@@ -337,9 +337,9 @@ window.onload = async () => {
 		})
 
 
-	displayItems();
+	displayItems(allItemsArr);
 	displayLocations();
-	displayEditItem()
+	displayEditItem(allItemsArr)
 	document.getElementById("editItemDiv").style.display = "none"
 	document.getElementById("addItemDiv").style.display = "none"
 	document.getElementById("receiveOrder").style.display = "none"
@@ -426,3 +426,12 @@ document.getElementById("addLocationSelector").addEventListener("click", () => {
 	}
 })
 
+document.getElementById('dashItemSearch').addEventListener('keyup', (e) => {
+	
+	var itemDiv = document.getElementById('displayEditItemDiv');
+	var findItem = e.target.value;
+	var filteredItems = allItemsArr.filter((el) => {
+		return el.name.includes(findItem) || el.brand.includes(findItem);
+	})
+	displayEditItem(filteredItems);
+})

@@ -51,7 +51,10 @@ function ensureAdmin(req, res, next){
 }
 
 app.get("/", (req, res) => {
-	res.redirect("/login");
+	res.render("index.handlebars", {
+		layout: false,
+		user: req.session.user
+	})
 })
 
 app.get("/login", async (req, res) => {
@@ -81,7 +84,7 @@ app.get("/sale", ensureLogin, async (req, res) => {
 	});
 });
 
-app.get("/reports", async (req, res) => {
+app.get("/reports", ensureLogin, async (req, res) => {
 	res.render("chart.handlebars", {
 		layout: false,
 		user: req.session.user
@@ -160,12 +163,6 @@ app.post("/registerOwner", async (req, res) => {
 	if(!emailPassword.badEmail && !emailPassword.badPassword){
 		var admin = await insertOwnerMod.addOwner(req.body.streetName, req.body.streetNumber, req.body.postalCode, req.body.city, req.body.province, req.body.country, req.body.companyName, req.body.ownerFname, req.body.ownerLname, req.body.ownerEmail, req.body.ownerPassword)
 
-
-		// if(admin.exists){
-		//     res.render("sale.handlebars", {
-		//         layout: false,
-		//     })
-		// }
 		req.session.user = {
 			fname: admin.fname,
 			email: admin.email,

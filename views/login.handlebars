@@ -6,20 +6,21 @@
 	</head>
 	<body>
 		{{> headerMenu}}
-		<div>
+		<div id="loginFormDiv">
 			<form action="/loginUser" method="POST" enctype="application/x-www-form-urlencoded">
-			<div>
+			<div class="regFormElDiv">
 				<label for="loginEmail" class="saleElMargin">Email</label>
 				<input type="email" id="loginEmail" name="loginEmail" class="saleElMargin">
 			</div>
-			<div>
+			<div class="regFormElDiv">
 				<label for="loginPassword" class="saleElMargin">Password</label>
 				<input type="password" id="loginPassword" name="loginPassword" class="saleElMargin">
 			</div>
-			<div>
+			<div class="regFormElDiv">
 				<input type="submit" value="Login">
 			</div>
 			</form>
 		</div>
+		{{> footerStuff}}
 	</body>
 </html>

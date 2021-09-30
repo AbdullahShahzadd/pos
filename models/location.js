@@ -5,7 +5,6 @@ mongoose.connect(process.env.db_connectionString, {useNewUrlParser: true, useUni
 mongoose.set('useFindAndModify', false);
 
 var locationSchema = new Schema({
-	"receiptNum": Number,
 	"streetName": String,
 	"streetNumber": Number,
 	"postalCode": String,

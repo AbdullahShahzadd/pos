@@ -6,7 +6,6 @@ mongoose.connect(process.env.db_connectionString, {useNewUrlParser: true, useUni
 mongoose.set('useFindAndModify', false);
 
 var receiptSchema = new Schema({
-	"_id": Number,
 	"items": [{type: mongoose.Types.ObjectId, ref: 'Item'}],
 	"total": Number,
 	"discount": Number,

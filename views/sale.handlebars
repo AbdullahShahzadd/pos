@@ -46,17 +46,17 @@
 						<div>
 							<div>
 								<label for="credit" class="saleElMargin">Credit</label><br>
-								<input type="number" id="credit" name="credit" class="saleElMargin roundBorder" >
+								<input type="number" id="credit" name="credit" class="saleElMargin roundBorder" step=".01" >
 							</div>
 
 							<div>
 								<label for="debit" class="saleElMargin">Debit</label><br>
-								<input type="number" id="debit" name="debit" class="saleElMargin roundBorder" >
+								<input type="number" step=".01" id="debit" name="debit" class="saleElMargin roundBorder" >
 							</div>
 
 							<div>
 								<label for="cash" class="saleElMargin">Cash</label><br>
-								<input type="number" name="cash" id="cash" class="saleElMargin roundBorder" >
+								<input type="number" name="cash" id="cash" class="saleElMargin roundBorder" step=".01">
 							</div>
 						</div>
 							<input type="hidden" id="receiptDiscount" name="receiptDiscount">
@@ -98,6 +98,7 @@
 				</div>
 			</div>
 		</div>
+		{{> footerStuff}}
 	</body>
 	<script src="./js/saleScript.js" type="text/javascript"></script>
 

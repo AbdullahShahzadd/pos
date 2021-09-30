@@ -153,9 +153,6 @@ header{
 	display: block;
 }
 
-
-/* ------------------------------ Sales Div ------------------------ */
-
 .rightShadowDiv {
     box-shadow: 8px 6px 8px rgba(0, 0, 0, 0.4);
 	margin: 0 50px;
@@ -167,6 +164,9 @@ header{
 	margin: 0 50px;
 	border: thin solid black;
 }
+
+/* ------------------------------ Sales Div ------------------------ */
+
 
 #saleDiv {
 	margin: 0px 5px;
@@ -365,7 +365,33 @@ header{
 	text-align: center;
 }
 
+#displayEditItemDiv {
+	min-height: 350px;
+	max-height: 350px;
+	overflow-y:auto;
+}
 
+#editItemDiv {
+	display:flex;
+	flex-direction:column;
+	align-items: center;
+	justify-content: center;
+}
+
+#dashItemSearchDiv {
+	width: 80%;
+}
+
+#dashItemSearch {
+	width: 80%;
+	margin: 15px auto;
+}
+
+#dashItemListDiv {
+	min-height: 100px;
+	max-height: 350px;
+	overflow-y:auto;
+}
 /* ------------------------------ chart -------------------------- */
 
 .selectorDiv {
@@ -385,10 +411,9 @@ header{
 }
 
 .chartDiv {
-	width: 80%;
+	width: 800px;
 	height: 400px;
-	display: flex;
-	justify-content: center;
+	display: block;
 }
 
 .monthSelectDiv {
@@ -418,4 +443,99 @@ header{
 	justify-content: center;
 	width: 80%;
 	margin: 30px auto;
+}
+
+#yearlySaleProfit {
+	display:flex;
+	flex-direction:column;
+	align-items: center;
+	justify-content: center;
+	width: 800px;
+	height: 400px;
+	margin: 30px auto;
+
+}
+
+
+/* ------------------------------ Home -------------------------- */
+
+.para {
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: 500;
+	font-size: 25px;
+	position: relative;
+	text-align: center;
+}
+
+#paraDiv {
+	width: 80%;
+	margin: auto;
+}
+
+.pageLinks {
+	display:flex;
+    box-shadow: 8px 6px 8px rgba(0, 0, 0, 0.4);
+	border: thin solid black;
+	margin: 10px auto;
+	padding: 10px;
+}
+
+.pageLinks a:link, a:visited, a:hover, a:active{
+	text-decoration: none;
+	color: black;
+}
+
+.pageLinks:hover {
+	transition: all .2s;
+	transform: scale(1.2);
+}
+
+#pageLinkParent {
+	width: 30%;
+	margin: auto;
+}
+
+/* ------------------------------ Registration -------------------------- */
+
+#regFormDiv {
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+	justify-content: center;
+    box-shadow: 8px 6px 8px rgba(0, 0, 0, 0.4);
+	margin: auto;
+	border: thin solid black;
+	width: 35%;
+}
+
+.regFormElDiv {
+	width: 25%;
+	margin: 10px 30% 10px 30%;
+}
+
+#loginFormDiv {
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+	justify-content: center;
+    box-shadow: 8px 6px 8px rgba(0, 0, 0, 0.4);
+	margin: auto;
+	border: thin solid black;
+	width: 35%;
+}
+
+#worksVideoDiv {
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+	justify-content: center;
+}
+
+.footerPara {
+
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: 100;
+	font-size: 12px;
+	position: relative;
+	text-align: center;
 }

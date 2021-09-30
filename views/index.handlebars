@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Home</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+	</head>
+	<body>
+		{{> headerMenu}}
+		<div id="pageLinkParent" class="rowDiv">
+			<div class="pageLinks"><a href="#about">About</a></div>
+			<div class="pageLinks"><a href="#works">How it Works</a></div>
+			<div class="pageLinks"><a href="#features">Features</a></div>
+		</div>
+		<div id="paraDiv">
+			<h1 class="centerText" id="about">What is this all about???</h2>
+			<div>	
+			<p class="para">Well, HatchPOS is a minimal POS (Point of Sale) system that provides business owners with the basic functionality required to run a business.</p>
+			</div>
+			<div>
+			<p class="para">We at HatchPOS are not trying to compete with feature rich POS systems out there.</p> 
+			</div>
+			<div>
+			<p class="para">We believe that in this day and age there are too many options out there, leading to confusion and inevitable regret over the choice made. At HatchPOS we make the choice easy by providing only the bare essentials required to run your business. We believe that only by relying on the essentials will you be able to discern from the sea of choices what is right for you. By the time your business outgrows HatchPOS, and we truly believe it will, you will have the tools to recognize the right POS system for you. </p>
+			</div>
+		</div>
+
+		<h1 id="works" class="centerText">So, How does it work??</h1>
+		<div id="worksVideoDiv">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jl3IQdymu5A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+		<h1 id="features" class="centerText">What kind of features do you have?</h1>
+		<div>
+			<p class="para">The features we currently support are</p>
+			<p class="para">- Multi-Location support</p>
+			<p class="para">- Sales</p>
+			<p class="para">- Inventory Management</p>
+			<p class="para">- Reports</p>
+		</div>
+		{{> footerStuff}}
+
+	</body>
+</html>

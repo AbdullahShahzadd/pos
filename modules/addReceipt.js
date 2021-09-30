@@ -9,16 +9,11 @@ module.exports.receipt = async function(itemIdArr, recDiscount, recTotal, recLoc
 		await Item.findOneAndUpdate({_id: el._id}, {$inc: {qty: -1}})
 	})
 
-	var locationChosen = await Location.findOne({_id: recLocation._id})
-	await Receipt.create({
-		_id: locationChosen.receiptNum,
+	var recObj = await Receipt.create({
 		discount: (recDiscount * 1),
 		total: recTotal,
 		purchaseDate: inDate || new Date(),
 		locations: recLocation._id,
 		items: itemIds
 	})
-
-
-	await Location.findOneAndUpdate({_id: recLocation._id}, {$inc: {receiptNum: 1}})
 }

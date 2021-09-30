@@ -16,13 +16,18 @@
 						<div class="itemStockColumn saleElMargin"><strong>Available</strong></div>
 						<div class="itemPriceColumn saleElMargin"><strong>Price</strong></div>
 					</div>
-			<div id="itemListDiv" class="expandWidth"></div>
+			<div id="dashItemListDiv" class="expandWidth"></div>
 
 		<div id="editItemButton" class="selectorDiv">
 			<h2 class="centerText">Edit Item</h2>
 			<div id="editItemExpand" class="lrpad15px"></div>
 		</div>
-			<div id="editItemDiv" class="expandWidth"></div>
+		<div id="editItemDiv">
+					<div id="dashItemSearchDiv">
+						<input type="text" id="dashItemSearch" placeholder="Search ..."><br>
+					</div>
+			<div id="displayEditItemDiv" class="expandWidth"></div>
+		</div>
 
 			<div id="receiveOrderSelector" class="selectorDiv">
 				<h2 class="centerText">Receive Order</h2>
@@ -115,6 +120,7 @@
 				</div>
 			</form>
 		</div>
+		{{> footerStuff}}
 	</body>
 
 	<script src="./js/adminDashboardScript.js" type="text/javascript"></script>

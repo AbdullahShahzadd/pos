@@ -1,4 +1,6 @@
 var allReceipts = []
+var allLocationsArr = [];
+var chosenLocation;
 window.onload = () => {
 	document.getElementById('yearlySaleProfit').style.display = "none";
 	document.getElementById("monthlySaleProfit").style.display = "none"
@@ -10,8 +12,18 @@ window.onload = () => {
 	var plusSign = document.createElement('h2')
 	plusSign.appendChild(document.createTextNode("+"))
 	monthlyExpander.appendChild(plusSign)
+	fetch('/getLocations')
+		.then(response => (response.json()))
+		.then(json => {
+			allLocationsArr = json.locations;
+			chosenLocation = json.chosenLocation
+		}).then(() => {displayLocations()})
 
-	fetch("/getReceipts")
+	getAndDisplayReceipts()
+};
+
+function getAndDisplayReceipts(){
+fetch("/getReceipts")
 		.then(res => (res.json()))
 		.then(json => {
 			allReceipts = json.receipts;
@@ -41,12 +53,68 @@ window.onload = () => {
 			yearSaleLineChart(labels, data, profitData)
 			monthlySaleChart(0)
 		});
-};
 
+}
+
+function displayLocations(){
+	
+	var chosenLocationName;
+	chosenLocation.businessName ?  chosenLocationName = chosenLocation.businessName : chosenLocationName = chosenLocation.streetName;
+	var chosenLocationDiv = document.getElementById("chosenLocationDisplayDiv")
+	chosenLocationDiv.appendChild(document.createTextNode(`Location: ${chosenLocationName}`))
+
+	var chooseLocationDiv = document.getElementById("chooseLocation");
+	chooseLocationDiv.classList.add("locationAnchorParent")
+
+	if(allLocationsArr.length > 1){
+		var locationAnchorsDiv = document.createElement('div');
+		locationAnchorsDiv.classList.add("chooseLocationAnchors")
+		
+		var chooseLocationButton = document.createElement('button');
+		chooseLocationButton.classList.add("head")
+		chooseLocationButton.appendChild(document.createTextNode("Change Location"));
+		chooseLocationDiv.appendChild(chooseLocationButton)
+
+		allLocationsArr.forEach(el => {
+			var locationAnchor = document.createElement('a');
+			locationAnchor.href = "#";
+			locationAnchor.setAttribute('id', el._id);
+			locationAnchor.addEventListener('click', () => {
+				changeChosenLocation(el)
+			})
+			var locationName;
+			el.name ?  locationName = el.name : locationName = el.streetName;
+			locationAnchor.appendChild(document.createTextNode(locationName))
+			locationAnchorsDiv.appendChild(locationAnchor)
+		})
+		chooseLocationDiv.appendChild(locationAnchorsDiv);
+	}
+}
+
+async function changeChosenLocation(el){
+
+	var chosenLocationDiv = document.getElementById("chosenLocationDisplayDiv");
+	while(chosenLocationDiv.firstChild){chosenLocationDiv.removeChild(chosenLocationDiv.firstChild);}
+	var locationName;
+	el.name ?  locationName = el.name : locationName = el.streetName;
+	chosenLocationDiv.appendChild(document.createTextNode(`Location: ${locationName}`))
+
+	const data = {el}
+	await fetch('/changeChosenLocation', {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify({data})
+	})
+
+	getAndDisplayReceipts()
+}
 
 
 function yearSaleLineChart(inLabel, inSalesData, inProfitData){
-	var ctx = document.getElementById('yearSaleChart');
+	var par = document.getElementById('yearlySaleProfit');
+	while(par.firstChild){par.removeChild(par.firstChild)}
+	var newChart = document.createElement('canvas');
+	var ctx = newChart;
 
 	const data = {
 		labels: inLabel,
@@ -83,6 +151,7 @@ function yearSaleLineChart(inLabel, inSalesData, inProfitData){
 			}
 		}
 	})
+	par.appendChild(newChart);
 }
 
 

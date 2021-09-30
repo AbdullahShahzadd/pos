@@ -13,7 +13,6 @@ module.exports.addOwner = async function(sName, sNum, postal, city, province, co
 		province: province,
 		country: country,
 		businessName: businessName,
-		receiptNum: 1000
 	})
 
 
@@ -26,22 +25,7 @@ module.exports.addOwner = async function(sName, sNum, postal, city, province, co
 		locations: chosenLocation._id
 	})
 
-	// await Admin.updateOne({email: oEmail}, {
-	//     $push: {locations: chosenLocation._id}
-	// })
 
 	var populatedAdmin = await Admin.findOne({_id: admin._id}).populate({path: 'locations', model: Location}).lean()
-	// console.log('newStuff')
-	// console.log(populatedAdmin)
-	// admin.populate({path: 'locations', model: Location});
-	// console.log('admin')
-	// console.log(admin)
-
-	// await admin.populate({path: 'locations', model: Location})
-	// if(admin.populated('locations')){console.log('locations not populated')}
-	// console.log('in registerOwner')
-	// console.log(admin)
-	// console.log('in registerOwner findOneMethod')
-	// var admin = await Admin.findOne({email: oEmail});
 	return populatedAdmin;
 }
