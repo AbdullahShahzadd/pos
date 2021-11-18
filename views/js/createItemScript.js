@@ -60,9 +60,6 @@ window.onload = async () => {
 		.then(response => (response.json()))
 		.then(json => {
 			document.getElementById('itemLocation').value = json.chosenLocation._id;
-			// console.log("in createItem onload")
-			// console.log(json.chosenLocation._id)
-			// console.log(json.locations)
 			allLocationsArr = json.locations;
 			chosenLocation = json.chosenLocation
 		})

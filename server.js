@@ -109,10 +109,6 @@ app.get("/getLocations",ensureLogin, (req, res) => {
 	res.json({locations: locationsArr, chosenLocation: chosen})
 })
 
-// app.get("/getSaleHistory", ensureLogin, async (req, res) => {
-//     var receiptArr = await Receipt.find({locations: req.session.user.chosenLocation._id}).lean();
-//     res.json({receipts: receiptArr})
-// })
 
 app.get("/register", (req, res) => {
 	res.render("registration.handlebars", {
@@ -120,20 +116,6 @@ app.get("/register", (req, res) => {
 	})
 })
 
-
-
-// todo figure out how to sanitize the req.body data
-// also what is sanitize????
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 app.post("/loginUser", async (req, res) => {

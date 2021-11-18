@@ -68,20 +68,6 @@ async function changeChosenLocation(el){
 	displayItems(allItemsArr);
 }
 
-// window.onload = async () => {
-//     await fetch('/getLocations')
-//         .then(response => (response.json()))
-//         .then(json => {
-//             document.getElementById('itemLocation').value = json.chosenLocation._id;
-//             // console.log("in createItem onload")
-//             // console.log(json.chosenLocation._id)
-//             // console.log(json.locations)
-//             allLocationsArr = json.locations;
-//             chosenLocation = json.chosenLocation
-//         })
-//     displayLocations()
-// }
-
 
 function updateBalanceRemaining(subtractThis){
 	var balanceRemainingDiv = document.getElementById('balanceRemaining');
@@ -320,22 +306,10 @@ window.onload = async () => {
 		})
 		})
 
-	// await fetch('/getLocations')
-	//     .then(response => (response.json()))
-	//     .then(json => {
-	//         json.locations.forEach(el => {
-	//             allLocationsArr.push(el);
-	//         })
-	//     })
-
-
 	await fetch('/getLocations')
 		.then(response => (response.json()))
 		.then(json => {
 			document.getElementById('itemLocation').value = json.chosenLocation._id;
-			// console.log("in createItem onload")
-			// console.log(json.chosenLocation._id)
-			// console.log(json.locations)
 			allLocationsArr = json.locations;
 			chosenLocation = json.chosenLocation
 		})
@@ -381,9 +355,6 @@ document.getElementById('cash').addEventListener('keyup', (e) => {
 	}
 })
 
-// document.getElementById('submitReceiptArr').addEventListener('click', function(){
-//     // return false;
-// })
 
 document.getElementById('discount').addEventListener('keyup', function(e){
 	var subTotalVal = document.getElementById('subtotal');

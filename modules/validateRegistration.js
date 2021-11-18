@@ -20,11 +20,6 @@ function checkPassword(password){
 	var checkForCapital = /.*[A-Z].*/;
 	var checkForLowerCase = /.*[a-z].*/;
 	var checkForNumber = /.*[0-9].*/;
-	// if(isGood){
-	//     isGood = checkForNumber.test(password) &&
-	//         checkForLowerCase.test(password) &&
-	//         checkForCapital.test(password);
-	// }
 	if(!hasError){
 		if(!checkForNumber.test(password) || 
 			!checkForLowerCase.test(password) || 
